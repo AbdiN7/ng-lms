@@ -1,0 +1,15 @@
+<!-- one row, two columns- left col is a navbar, right col is the content which is dependent on which button is selected -->
+<div>
+    <div class="row">
+        <div class="col-sm-1" style="padding-left: 0em;">
+            <div class="btn-group-vertical" style="width: 100%;">
+                <button type="button" class="btn btn-secondary" >Libraries</button>
+                <button type="button" class="btn btn-secondary" >Books</button>
+            </div>
+        </div>
+
+        <div class="col-sm-11">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
