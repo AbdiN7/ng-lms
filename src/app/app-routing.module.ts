@@ -17,16 +17,16 @@ const routes: Routes = [{
       path: 'lms/home',
       component: HomeComponent
     },
-    {
-      path: "lms/admin",
-      // component: ,
-      // children:[]
-    },
-    {
-      path: "lms/borrower",
-      // component: ,
-      // children:[]
-    }
+    // {
+    //   path: "lms/admin",
+    //   component: ,
+    //   children:[]
+    // },
+    // {
+    //   path: "lms/borrower",
+    //   component: ,
+    //   children:[]
+    // }
   ]
 }];
 
