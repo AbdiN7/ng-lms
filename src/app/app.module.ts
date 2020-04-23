@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AdminComponent } from './admin/admin.component';
+import { BranchTableComponent } from './Admin/branch-table/branch-table.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdminComponent } from './admin/admin.component';
     FooterComponent,
     HomeComponent,
     LayoutComponent,
-    AdminComponent
+    AdminComponent,
+    BranchTableComponent
   ],
   imports: [
     BrowserModule,
