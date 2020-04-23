@@ -5,10 +5,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
+import { AdminComponent } from './admin/admin.component';
+import { BranchTableComponent } from './Admin/branch-table/branch-table.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { LayoutComponent } from './layout/layout.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    LayoutComponent
+    LayoutComponent,
+    AdminComponent,
+    BranchTableComponent
   ],
   imports: [
     BrowserModule,
