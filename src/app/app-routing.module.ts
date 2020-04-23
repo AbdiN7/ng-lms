@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AdminComponent } from './admin/admin.component';
+import { LibrarianComponent } from './librarian/librarian.component';
 
 
 const routes: Routes = [{
@@ -28,6 +29,11 @@ const routes: Routes = [{
     //   component: ,
     //   children:[]
     // }
+    {
+      path: "lms/librarian",
+      component: LibrarianComponent,
+      children: []
+    }
   ]
 }];
 

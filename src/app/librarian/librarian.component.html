@@ -1,0 +1,28 @@
+<div class="d-flex" style="margin-top: 4em;">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+      <li ngbNavItem="Books">
+        <a ngbNavLink >Books</a>
+        <ng-template ngbNavContent>
+          <p> Books Datatable </p>
+            <app-book-table></app-book-table>
+        </ng-template>
+      </li>
+
+      <li ngbNavItem="Book Copies">
+        <a ngbNavLink>Book Copies</a>
+        <ng-template ngbNavContent>
+          <p> Book Copies </p>
+            <app-bookCopies-table></app-bookCopies-table>
+        </ng-template>
+      </li>
+
+      <li ngbNavItem="Branches">
+        <a ngbNavLink>Branches</a>
+        <ng-template ngbNavContent>
+          <p> Library Branch Datatable </p>
+        </ng-template>
+      </li>
+    </ul>
+  
+    <div [ngbNavOutlet]="nav" class="ml-4"></div>
+  </div>
