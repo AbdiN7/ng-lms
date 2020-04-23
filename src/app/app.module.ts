@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AdminComponent } from './admin/admin.component';
 import { BranchTableComponent } from './admin/branch-table/branch-table.component';
-import { AuthorTableComponent } from './Admin/author-table/author-table.component';
+import { AuthorTableComponent } from './admin/author-table/author-table.component';
 
 @NgModule({
   declarations: [
