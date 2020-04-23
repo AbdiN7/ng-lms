@@ -21,38 +21,37 @@
 -->
 
 <div class="d-flex" style="margin-top: 4em;">
-    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-      <li ngbNavItem="Branches">
-        <a ngbNavLink >Branches</a>
-        <ng-template ngbNavContent>
-          <p> Branches Datatable </p>
-            <app-branch-table></app-branch-table>
-        </ng-template>
-      </li>
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+    <li ngbNavItem="Branches">
+      <a ngbNavLink >Branches</a>
+      <ng-template ngbNavContent>
+        <app-branch-table></app-branch-table>
+      </ng-template>
+    </li>
 
-      <li ngbNavItem="Authors">
-        <a ngbNavLink>Authors</a>
-        <ng-template ngbNavContent>
-          <p> Authors Datatable </p>
-        </ng-template>
-      </li>
+    <li ngbNavItem="Authors">
+      <a ngbNavLink>Authors</a>
+      <ng-template ngbNavContent>
+        <app-author-table></app-author-table>
+      </ng-template>
+    </li>
 
-      <li ngbNavItem="Publishers">
-        <a ngbNavLink>Publishers</a>
-        <ng-template ngbNavContent>
-          <p> Publishers Datatable </p>
-        </ng-template>
-      </li>
+    <li ngbNavItem="Publishers">
+      <a ngbNavLink>Publishers</a>
+      <ng-template ngbNavContent>
+        <p> Publishers Datatable </p>
+      </ng-template>
+    </li>
 
-      <li ngbNavItem="Borrowers">
-        <a ngbNavLink>Borrowers</a>
-        <ng-template ngbNavContent>
-          <p> Borrowers Datatable </p>
-        </ng-template>
-      </li>
-    </ul>
-  
-    <div [ngbNavOutlet]="nav" class="ml-4"></div>
-  </div>
-  
+    <li ngbNavItem="Borrowers">
+      <a ngbNavLink>Borrowers</a>
+      <ng-template ngbNavContent>
+        <p> Borrowers Datatable </p>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ml-4"></div>
+</div>
+
   <!-- <pre>Active: {{ active }}</pre> -->
