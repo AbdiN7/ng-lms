@@ -1,3 +1,4 @@
+
 <div class="d-flex" style="margin-top: 4em;">
     <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
       <li ngbNavItem="Books">
@@ -8,11 +9,11 @@
         </ng-template>
       </li>
 
-      <li ngbNavItem="Book Copies">
-        <a ngbNavLink>Book Copies</a>
+      <li ngbNavItem="BookCopies">
+        <a ngbNavLink>BookCopies</a>
         <ng-template ngbNavContent>
           <p> Book Copies </p>
-            <app-bookCopies-table></app-bookCopies-table>
+            <app-book-copy-table></app-book-copy-table>
         </ng-template>
       </li>
 

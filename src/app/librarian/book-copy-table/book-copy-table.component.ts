@@ -8,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class BookCopyTableComponent implements OnInit {
 
   constructor() { }
-  today = new Date();
-  totalAuthors = 0;
+
   ngOnInit(): void {
   }
 

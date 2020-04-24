@@ -26,7 +26,7 @@ import { BookCopyTableComponent } from './librarian/book-copy-table/book-copy-ta
     BranchTableComponent,
     LibrarianComponent,
     BookTableComponent,
-    BookCopyTableComponent
+    BookCopyTableComponent,
   ],
   imports: [
     BrowserModule,
