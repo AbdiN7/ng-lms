@@ -12,6 +12,10 @@ import { LayoutComponent } from './layout/layout.component';
 import { AdminComponent } from './admin/admin.component';
 import { BranchTableComponent } from './admin/branch-table/branch-table.component';
 import { AuthorTableComponent } from './admin/author-table/author-table.component';
+import { PublisherTableComponent } from './admin/publisher-table/publisher-table.component';
+import { BorrowerTableComponent } from './admin/borrower-table/borrower-table.component';
+import { AdminHttpService } from './common/admin-http.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,15 +26,18 @@ import { AuthorTableComponent } from './admin/author-table/author-table.componen
     LayoutComponent,
     AdminComponent,
     BranchTableComponent,
-    AuthorTableComponent
+    AuthorTableComponent,
+    PublisherTableComponent,
+    BorrowerTableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [AdminHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

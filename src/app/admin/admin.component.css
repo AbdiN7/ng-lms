@@ -1,1 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.css';
+
+.ml-4{
+    width: 100% !important;
+}
