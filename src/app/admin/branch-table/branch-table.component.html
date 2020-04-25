@@ -1,6 +1,7 @@
 <form>
     <div class="form-group form-inline">
-        Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"/>
+        Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+        <span class="ml-3" *ngIf="service.loading$ | async"> <div class="spinner-border text-secondary"></div> </span>
     </div>
 
     <table class="table table-striped">
@@ -13,13 +14,13 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let branch of branches">
-                <th scope="row">{{ branch.branchId }}</th>
+            <tr *ngFor="let branch of branches$ | async; index as i">
+                <th scope="row">{{ branch.branchId }}</th> <!-- id's can be easily obfuscated with the index above-->
                 <td>
-                    <ngb-highlight [result]="branch.branchName" [term]="searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="branch.branchName" [term]="service.searchTerm"></ngb-highlight>
                 </td>
                 <td>
-                    <ngb-highlight [result]="branch.branchAddress" [term]="searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="branch.branchAddress" [term]="service.searchTerm"></ngb-highlight>
                 </td>
             </tr>
         </tbody>
@@ -27,13 +28,13 @@
 
     <div class="d-flex justify-content-between p-2">
         <ngb-pagination
-            [collectionSize]="total" [(page)]="page" [pageSize]="pageSize">
+            [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
         </ngb-pagination>
 
-        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+            <option [ngValue]="10">10 items per page</option>
             <option [ngValue]="25">25 items per page</option>
             <option [ngValue]="50">50 items per page</option>
-            <option [ngValue]="100">100 items per page</option>
         </select>
     </div>
 </form>

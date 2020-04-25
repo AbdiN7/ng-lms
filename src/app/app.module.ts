@@ -14,8 +14,8 @@ import { BranchTableComponent } from './admin/branch-table/branch-table.componen
 import { AuthorTableComponent } from './admin/author-table/author-table.component';
 import { PublisherTableComponent } from './admin/publisher-table/publisher-table.component';
 import { BorrowerTableComponent } from './admin/borrower-table/borrower-table.component';
-import { AdminHttpService } from './common/admin-http.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BranchHttpService } from './common/admin/branch-http.service';
 
 @NgModule({
   declarations: [
@@ -35,9 +35,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [AdminHttpService],
+  providers: [BranchHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

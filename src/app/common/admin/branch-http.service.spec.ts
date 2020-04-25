@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminHttpService } from './admin-http.service';
+import { BranchHttpService } from './branch-http.service';
 
-describe('AdminHttpService', () => {
-  let service: AdminHttpService;
+describe('BranchHttpService', () => {
+  let service: BranchHttpService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AdminHttpService);
+    service = TestBed.inject(BranchHttpService);
   });
 
   it('should be created', () => {
