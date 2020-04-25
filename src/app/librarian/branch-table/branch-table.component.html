@@ -1,0 +1,30 @@
+
+<h3>List of Books within a library branch in LMS Application.</h3>
+<button type="button" class="btn btn-primary">Create New Branches</button>
+<div class="ds-l-row ds-u-margin-top--3">
+  <div class="ds-l-col--9">
+    <ngb-pagination [collectionSize]="totalBranches" [(page)]="pager.currentPage" [maxSize]="5" [boundaryLinks]="true"
+      (pageChange)="setPage($event)"></ngb-pagination>
+  </div>
+</div>
+
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Branch Name</th>
+      <th scope="col">Branch Address</th>
+      <th scope="col">Book Copies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of pagedItems  | lmsSort ; let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{a.branchName | uppercase}}</td>
+      <td>{{a.branchAddress | uppercase}}</td>
+      <td><span *ngFor="let b of a.bookCopy">{{b.book.title}},{{b.noOfCopies}}</span></td>
+      <!-- <td><button type="button" class="btn btn-danger" (click)="deleteBook(a)">Delete</button></td> -->
+    </tr>
+  </tbody>
+</table>

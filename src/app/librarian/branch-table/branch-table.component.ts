@@ -4,35 +4,35 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PagerService } from '../../common/pager.service';
 
 @Component({
-  selector: 'app-book-table',
-  templateUrl: './book-table.component.html',
-  styleUrls: ['./book-table.component.css']
+  selector: 'app-branch-table',
+  templateUrl: './branch-table.component.html',
+  styleUrls: ['./branch-table.component.css']
 })
-export class BookTableComponent implements OnInit, AfterViewInit {
+export class BranchTableComponent implements OnInit {
 
   constructor(private httpService: LmshttpService, private modalService: NgbModal, private pagerService: PagerService) { }
-  books: any;
+  branches: any;
   selectedBook: any;
   private modalRef: NgbModalRef;
   errMsg: any;
   closeResult: any;
-  totalBooks = 0;
+  totalBranches = 0;
   today = new Date();
   pager: any = {};
   pagedItems: any[];
   searchString = '';
   ngOnInit(): void {
-    this.loadAllBooks();
+    this.loadAllBranches();
   }
 
   ngAfterViewInit() {
     console.log('after view is loaded.')
   }
 
-  loadAllBooks() {
-    this.httpService.getAll('http://localhost:8090/lms/librarian/books').subscribe(resp => {
-      this.books = resp;
-      this.totalBooks = this.books.length;
+  loadAllBranches() {
+    this.httpService.getAll('http://localhost:8090/lms/librarian/branches').subscribe(resp => {
+      this.branches = resp;
+      this.totalBranches = this.branches.length;
       this.setPage(1);
     })
   }
@@ -56,18 +56,27 @@ export class BookTableComponent implements OnInit, AfterViewInit {
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
-    this.pager = this.pagerService.getPager(this.books.length, page, 10);
-    this.pagedItems = this.books.slice(
+    this.pager = this.pagerService.getPager(this.branches.length, page, 10);
+    this.pagedItems = this.branches.slice(
       this.pager.startIndex,
       this.pager.endIndex + 1,
     );
   }
 
-  searchBooks(){
-    this.httpService.getAll(`http://localhost:8090/lms/book/${this.searchString}`).subscribe(resp => {
-      this.books = resp;
-      this.totalBooks = this.books.length;
-      this.setPage(1);
-    })
+  deleteAuthor(a){
+    // let author = {
+    //   authorId: a.authorId
+    // }
+    // this.httpService.postObj('http://localhost:8090/lms/updateAuthor', author).subscribe(resp => {
+    //   this.loadAllAuthors();
+    // })
   }
+
+  // searchBooks(){
+  //   this.httpService.getAll(`http://localhost:8090/lms/readAuthorsByName/${this.searchString}`).subscribe(resp => {
+  //     this.books = resp;
+  //     this.totalBooks = this.books.length;
+  //     this.setPage(1);
+  //   })
+  // }
 }

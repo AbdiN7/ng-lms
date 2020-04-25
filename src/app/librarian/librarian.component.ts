@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./librarian.component.css']
 })
 export class LibrarianComponent implements OnInit {
-  active = 'Books';
+  
+  active = 'Books, Branches';
 
   constructor() { }
 

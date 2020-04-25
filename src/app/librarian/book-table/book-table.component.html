@@ -1,6 +1,9 @@
 
-<h3>List of Books within a library branch in LMS Application as of {{ today | date: shortDate | lowercase  }}. Total number of books: {{ totalAuthors }}.</h3> 
-<button type="button" class="btn btn-primary">Create New Author</button>
+
+
+
+<!-- <h3>List of Books within a library branch in LMS Application as of {{ today | date: shortDate | lowercase  }}. Total number of books: {{ totalBooks }}.</h3>  -->
+<button type="button" class="btn btn-primary">Create New Book</button>
 <div class="ds-l-row ds-u-margin-top--3">
   <div class="ds-l-col--9">
     <ngb-pagination [collectionSize]="totalBooks" [(page)]="pager.currentPage" [maxSize]="5" [boundaryLinks]="true"
@@ -8,28 +11,27 @@
   </div>
 </div>
 <div class="ds-l-row ds-u-margin-top--3">
-  Search: <input type="Text" [(ngModel)]="searchString" (input)="searchAuthors()">
+  Search: <input type="Text" [(ngModel)]="searchString" (input)="searchBooks()">
 </div>
 
-
-<!-- <table class="table table-dark">
+<table class="table table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Author Name</th>
-      <th scope="col">Books Written</th>
-      <th scope="col">Edit</th>
+      <th scope="col">Book Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Publisher</th>
       <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let a of pagedItems  | lmsSort ; let i=index">
       <th scope="row">{{i+1}}</th>
-      <td>{{a.authorName | uppercase}}</td>
-      <td><span *ngFor="let b of a.books">{{b.title}},</span></td>
-      <td><button type="button" class="btn btn-primary" (click)="open(editAuthorModal, a)">Edit</button></td>
-      <td><button type="button" class="btn btn-danger" (click)="deleteAuthor(a)">Delete</button></td>
+      <td>{{a.title | uppercase}}</td>
+      <td>{{a.author.authorName | uppercase}}</td>
+      <td>{{a.publisher.publisherName | uppercase}}</td>
+      <!-- <td><button type="button" class="btn btn-danger" (click)="deleteBook(a)">Delete</button></td> -->
     </tr>
   </tbody>
-</table> -->
+</table>
 

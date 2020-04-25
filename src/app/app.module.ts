@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,10 +11,13 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AdminComponent } from './admin/admin.component';
-import { BranchTableComponent } from './admin/branch-table/branch-table.component';
+import { BranchTableComponent } from './librarian/branch-table/branch-table.component';
 import { LibrarianComponent } from './librarian/librarian.component';
 import { BookTableComponent } from './librarian/book-table/book-table.component';
-import { BookCopyTableComponent } from './librarian/book-copy-table/book-copy-table.component';
+import { LmshttpService } from './common/lmshttp.service';
+import { LmsSortPipe } from './common/pipes/lms-sort.pipe';
+import { PagerService } from './common/pager.service';
+
 
 @NgModule({
   declarations: [
@@ -26,15 +30,16 @@ import { BookCopyTableComponent } from './librarian/book-copy-table/book-copy-ta
     BranchTableComponent,
     LibrarianComponent,
     BookTableComponent,
-    BookCopyTableComponent,
+    LmsSortPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LmshttpService, PagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
