@@ -8,7 +8,6 @@
   </div>
 </div>
 
-
 <table class="table table-dark">
   <thead>
     <tr>
@@ -19,11 +18,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let a of pagedItems  | lmsSort ; let i=index">
+    <tr *ngFor="let a of pagedItems | lmsSort ; let i=index">{{a | json}}
       <th scope="row">{{i+1}}</th>
       <td>{{a.branchName | uppercase}}</td>
       <td>{{a.branchAddress | uppercase}}</td>
-      <td><span *ngFor="let b of a.bookCopy">{{b.book.title}},{{b.noOfCopies}}</span></td>
+      <td>{{a}}</td>
+      <!-- <td><span *ngFor="let b of a.bookCopies">{{b.book.title}},</span></td> -->
       <!-- <td><button type="button" class="btn btn-danger" (click)="deleteBook(a)">Delete</button></td> -->
     </tr>
   </tbody>

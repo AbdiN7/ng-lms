@@ -12,7 +12,7 @@ export class BranchTableComponent implements OnInit {
 
   constructor(private httpService: LmshttpService, private modalService: NgbModal, private pagerService: PagerService) { }
   branches: any;
-  selectedBook: any;
+  selectedBranch: any;
   private modalRef: NgbModalRef;
   errMsg: any;
   closeResult: any;
@@ -38,7 +38,7 @@ export class BranchTableComponent implements OnInit {
   }
 
   open(content, obj) {
-    this.selectedBook = obj;
+    this.selectedBranch = obj;
     this.modalRef = this.modalService.open(content);
     this.modalRef.result.then(
       result => {
@@ -63,14 +63,14 @@ export class BranchTableComponent implements OnInit {
     );
   }
 
-  deleteAuthor(a){
-    // let author = {
-    //   authorId: a.authorId
-    // }
-    // this.httpService.postObj('http://localhost:8090/lms/updateAuthor', author).subscribe(resp => {
-    //   this.loadAllAuthors();
-    // })
-  }
+  // deleteAuthor(a){
+  //   let author = {
+  //     authorId: a.authorId
+  //   }
+  //   this.httpService.postObj('http://localhost:8090/lms/updateAuthor', author).subscribe(resp => {
+  //     this.loadAllAuthors();
+  //   })
+  // }
 
   // searchBooks(){
   //   this.httpService.getAll(`http://localhost:8090/lms/readAuthorsByName/${this.searchString}`).subscribe(resp => {

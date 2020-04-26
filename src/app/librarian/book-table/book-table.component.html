@@ -1,9 +1,6 @@
 
-
-
-
-<!-- <h3>List of Books within a library branch in LMS Application as of {{ today | date: shortDate | lowercase  }}. Total number of books: {{ totalBooks }}.</h3>  -->
-<button type="button" class="btn btn-primary">Create New Book</button>
+<h3>List of Books within a library branch in LMS Application.</h3>
+<button type="button" class="btn btn-primary">Create New Branches</button>
 <div class="ds-l-row ds-u-margin-top--3">
   <div class="ds-l-col--9">
     <ngb-pagination [collectionSize]="totalBooks" [(page)]="pager.currentPage" [maxSize]="5" [boundaryLinks]="true"
@@ -13,25 +10,24 @@
 <div class="ds-l-row ds-u-margin-top--3">
   Search: <input type="Text" [(ngModel)]="searchString" (input)="searchBooks()">
 </div>
-
 <table class="table table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Book Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">Publisher</th>
-      <th scope="col">Delete</th>
+      <th scope="col">Branch Name</th>
+      <th scope="col">Branch Address</th>
+      <th scope="col">Book Copies</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let a of pagedItems  | lmsSort ; let i=index">
+    <tr *ngFor="let a of pagedItems | lmsSort ; let i=index">
+      <!-- {{a | json}} -->
       <th scope="row">{{i+1}}</th>
       <td>{{a.title | uppercase}}</td>
-      <td>{{a.author.authorName | uppercase}}</td>
-      <td>{{a.publisher.publisherName | uppercase}}</td>
+      <td>{{a.branchAddress | uppercase}}</td>
+      <td>{{a}}</td>
+      <!-- <td><span *ngFor="let b of a.bookCopies">{{b.book.title}},</span></td> -->
       <!-- <td><button type="button" class="btn btn-danger" (click)="deleteBook(a)">Delete</button></td> -->
     </tr>
   </tbody>
 </table>
-

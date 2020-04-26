@@ -8,7 +8,7 @@ import { PagerService } from '../../common/pager.service';
   templateUrl: './book-table.component.html',
   styleUrls: ['./book-table.component.css']
 })
-export class BookTableComponent implements OnInit, AfterViewInit {
+export class BookTableComponent implements OnInit {
 
   constructor(private httpService: LmshttpService, private modalService: NgbModal, private pagerService: PagerService) { }
   books: any;
@@ -21,7 +21,7 @@ export class BookTableComponent implements OnInit, AfterViewInit {
   pager: any = {};
   pagedItems: any[];
   searchString = '';
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadAllBooks();
   }
 
@@ -30,8 +30,10 @@ export class BookTableComponent implements OnInit, AfterViewInit {
   }
 
   loadAllBooks() {
+    console.log("LOADING ALL BOOKS");
     this.httpService.getAll('http://localhost:8090/lms/librarian/books').subscribe(resp => {
       this.books = resp;
+      console.log(this.books);
       this.totalBooks = this.books.length;
       this.setPage(1);
     })
@@ -64,10 +66,20 @@ export class BookTableComponent implements OnInit, AfterViewInit {
   }
 
   searchBooks(){
-    this.httpService.getAll(`http://localhost:8090/lms/book/${this.searchString}`).subscribe(resp => {
+    console.log(this.searchString);
+    this.httpService.getAll(`http://localhost:8090/lms/librarian/book/title/${this.searchString}`).subscribe(resp => {
       this.books = resp;
       this.totalBooks = this.books.length;
       this.setPage(1);
     })
   }
+
+  // deleteAuthor(a){
+  //   let author = {
+  //     authorId: a.authorId
+  //   }
+  //   this.httpService.postObj('http://localhost:8090/lms/updateAuthor', author).subscribe(resp => {
+  //     this.loadAllAuthors();
+  //   })
+  // }
 }

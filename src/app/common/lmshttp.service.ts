@@ -16,5 +16,8 @@ export class LmshttpService {
     return this.http.post(url, obj);
   }
 
+  delete(url){
+    return this.http.delete(url);
+  }
 }
 

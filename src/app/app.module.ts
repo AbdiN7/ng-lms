@@ -17,6 +17,7 @@ import { BookTableComponent } from './librarian/book-table/book-table.component'
 import { LmshttpService } from './common/lmshttp.service';
 import { LmsSortPipe } from './common/pipes/lms-sort.pipe';
 import { PagerService } from './common/pager.service';
+import { BookCopyTableComponent } from './librarian/book-copy-table/book-copy-table.component';
 
 
 @NgModule({
@@ -30,14 +31,16 @@ import { PagerService } from './common/pager.service';
     BranchTableComponent,
     LibrarianComponent,
     BookTableComponent,
-    LmsSortPipe
+    LmsSortPipe,
+    BookCopyTableComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [LmshttpService, PagerService],
   bootstrap: [AppComponent]
