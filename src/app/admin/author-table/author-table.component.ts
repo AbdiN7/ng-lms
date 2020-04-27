@@ -10,6 +10,7 @@ export class AuthorTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("AUTHOR TABLE COMPONENT LOADED");
   }
 
 }

@@ -10,6 +10,7 @@ export class BorrowerTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("BORROWER TABLE COMPONENT LOADED");
   }
 
 }

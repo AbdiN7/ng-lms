@@ -41,15 +41,14 @@ export class BranchHttpService {
     this.http.get<Branch[]>('http://localhost:8100/lms/admin/branch').subscribe(resp => {
       this._ALL_BRANCHES$.next(resp);
 
-      console.log("filling with dummy data with ID's >2000 to be big...")
-      for(let i = 2000; i<2100; ++i){
-        this._ALL_BRANCHES$.getValue().push({
-          branchId: i,
-          branchName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-          branchAddress: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-        });
-      }
-
+      // console.log("filling with dummy data with ID's >2000 to be big...")
+      // for(let i = 2000; i<2100; ++i){
+      //   this._ALL_BRANCHES$.getValue().push({
+      //     branchId: i,
+      //     branchName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+      //     branchAddress: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      //   });
+      // }
     });
 
     this._search$.pipe(
@@ -63,6 +62,27 @@ export class BranchHttpService {
     });
 
     this._search$.next();
+  }
+
+  deleteById(branchId: number){
+    this.http.delete('http://localhost:8100/lms/admin/branch/' + branchId).subscribe( res => {
+      // remove from storage array
+      this._ALL_BRANCHES$.next( 
+        this._ALL_BRANCHES$.getValue().filter(ele => {
+        return ele.branchId !== branchId
+        })
+      );
+
+      // remove from the array async piped to the table
+      this._branches$.next(
+        this._branches$.getValue().filter(ele => {
+          return ele.branchId !== branchId
+          })
+      );
+
+      // re-paginate to bring in a new row
+      this._total$.next(this._ALL_BRANCHES$.getValue().length);
+    });
   }
 
   // GETTERS

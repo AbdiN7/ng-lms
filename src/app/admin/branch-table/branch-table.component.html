@@ -10,17 +10,22 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
 
         <tbody>
             <tr *ngFor="let branch of branches$ | async; index as i">
-                <th scope="row">{{ branch.branchId }}</th> <!-- id's can be easily obfuscated with the index above-->
+                <th scope="row">{{ i+1 }}</th> <!-- id's can be easily obfuscated with the index above -->
                 <td>
                     <ngb-highlight [result]="branch.branchName" [term]="service.searchTerm"></ngb-highlight>
                 </td>
                 <td>
                     <ngb-highlight [result]="branch.branchAddress" [term]="service.searchTerm"></ngb-highlight>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info mr-1" (click)="updateBranch(branch)">Update</button>
+                    <button type="button" class="btn btn-danger ml-1" (click)="deleteBranch(branch)">Delete</button>
                 </td>
             </tr>
         </tbody>

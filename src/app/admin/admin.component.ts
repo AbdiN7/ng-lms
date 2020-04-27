@@ -11,6 +11,7 @@ export class AdminComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("PUBLISHER TABLE COMPONENT LOADED");
   }
 
 }
