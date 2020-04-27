@@ -17,6 +17,9 @@ import { BranchTableComponent } from './admin/branch-table/branch-table.componen
 import { BorrowerComponent } from './borrower/borrower.component';
 import { BookListComponent } from './borrower/book-list/book-list.component';
 import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
+import { BookLoansService } from './borrower/borrower.service';
+import { HttpErrorHandler } from './http-error-handler.service';
+import { MessageService } from './message.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,7 @@ import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [ HttpErrorHandler, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

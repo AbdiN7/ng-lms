@@ -1,4 +1,17 @@
 <p>borrower works!</p>
 
+<label>Input card Number:
+  <input #cardNo/>
+</label>
+<button (click)="getLoans(cardNo.value); cardNo.value=''">Input card Number</button>
 
+<ul class="BookLoan">
+  <li *ngFor = "let BookLoan of BookLoans">
+    <span class="badge">{{BookLoan.bookLoanKey.book.title}}</span>
+  </li>
+</ul>
 
+<!-- Spinner -->
+<!-- <span class="ml-3" *ngIf="service.loading$ | async"> 
+  <div class="spinner-border text-secondary"></div> 
+</span> -->
