@@ -1,5 +1,5 @@
 import {Directive, EventEmitter, Input, Output} from '@angular/core';
-import {book} from './book';
+import {book} from '../entities/book';
 
 export type SortColumn = keyof book | '';
 export type SortDirection = 'asc' | 'desc' | '';

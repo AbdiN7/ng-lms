@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BookListComponent} from './book-list/book-list.component';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { BookLoan } from './book-list/bookloan';
+import { BookLoan } from './entities/bookloan';
 import { BookLoansService } from './borrower.service';
 
 @Component({

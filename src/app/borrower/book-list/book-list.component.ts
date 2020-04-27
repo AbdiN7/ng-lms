@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { book} from './book';
+import { book} from '../entities/book';
 import { Observable } from 'rxjs';
 import {NgbdSortableHeader, SortEvent} from './sortable.directive';
 import { bookService } from './book.service';
