@@ -4,11 +4,11 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PagerService } from '../../common/pager.service';
 
 @Component({
-  selector: 'app-book-table',
-  templateUrl: './book-table.component.html',
-  styleUrls: ['./book-table.component.css']
+  selector: 'app-lib-book-table',
+  templateUrl: './lib-book-table.component.html',
+  styleUrls: ['./lib-book-table.component.css']
 })
-export class BookTableComponent implements OnInit {
+export class LibBookTableComponent implements OnInit {
 
   constructor(private httpService: LmshttpService, private modalService: NgbModal, private pagerService: PagerService) { }
   books: any;
@@ -83,3 +83,4 @@ export class BookTableComponent implements OnInit {
   //   })
   // }
 }
+

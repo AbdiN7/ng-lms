@@ -4,11 +4,11 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PagerService } from '../../common/pager.service';
 
 @Component({
-  selector: 'app-book-copy-table',
-  templateUrl: './book-copy-table.component.html',
-  styleUrls: ['./book-copy-table.component.css']
+  selector: 'app-lib-book-copy-table',
+  templateUrl: './lib-book-copy-table.component.html',
+  styleUrls: ['./lib-book-copy-table.component.css']
 })
-export class BookCopyTableComponent implements OnInit, AfterViewInit {
+export class LibBookCopyTableComponent implements OnInit, AfterViewInit {
 
   constructor(private httpService: LmshttpService, private modalService: NgbModal, private pagerService: PagerService) { }
   bookCopies: any;

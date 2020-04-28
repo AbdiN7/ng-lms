@@ -11,13 +11,13 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AdminComponent } from './admin/admin.component';
-import { BranchTableComponent } from './librarian/branch-table/branch-table.component';
+import { LibBranchTableComponent } from './librarian/lib-branch-table/lib-branch-table.component';
 import { LibrarianComponent } from './librarian/librarian.component';
-import { BookTableComponent } from './librarian/book-table/book-table.component';
 import { LmshttpService } from './common/lmshttp.service';
 import { LmsSortPipe } from './common/pipes/lms-sort.pipe';
 import { PagerService } from './common/pager.service';
-import { BookCopyTableComponent } from './librarian/book-copy-table/book-copy-table.component';
+import { LibBookTableComponent } from './librarian/lib-book-table/lib-book-table.component';
+import { LibBookCopyTableComponent } from './librarian/lib-book-copy-table/lib-book-copy-table.component';
 
 
 @NgModule({
@@ -28,11 +28,11 @@ import { BookCopyTableComponent } from './librarian/book-copy-table/book-copy-ta
     HomeComponent,
     LayoutComponent,
     AdminComponent,
-    BranchTableComponent,
+    LibBranchTableComponent,
     LibrarianComponent,
-    BookTableComponent,
     LmsSortPipe,
-    BookCopyTableComponent,
+    LibBookTableComponent,
+    LibBookCopyTableComponent,
   ],
   imports: [
     BrowserModule,

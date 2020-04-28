@@ -4,11 +4,11 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PagerService } from '../../common/pager.service';
 
 @Component({
-  selector: 'app-branch-table',
-  templateUrl: './branch-table.component.html',
-  styleUrls: ['./branch-table.component.css']
+  selector: 'app-lib-branch-table',
+  templateUrl: './lib-branch-table.component.html',
+  styleUrls: ['./lib-branch-table.component.css']
 })
-export class BranchTableComponent implements OnInit {
+export class LibBranchTableComponent implements OnInit {
 
   constructor(private httpService: LmshttpService, private modalService: NgbModal, private pagerService: PagerService) { }
   branches: any;

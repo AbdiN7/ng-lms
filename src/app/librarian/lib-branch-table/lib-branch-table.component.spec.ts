@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookCopyTableComponent } from './book-copy-table.component';
+import { LibBranchTableComponent } from './lib-branch-table.component';
 
-describe('BookCopyTableComponent', () => {
-  let component: BookCopyTableComponent;
-  let fixture: ComponentFixture<BookCopyTableComponent>;
+describe('LibBranchTableComponent', () => {
+  let component: LibBranchTableComponent;
+  let fixture: ComponentFixture<LibBranchTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookCopyTableComponent ]
+      declarations: [ LibBranchTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BookCopyTableComponent);
+    fixture = TestBed.createComponent(LibBranchTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
