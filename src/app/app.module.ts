@@ -16,8 +16,8 @@ import { BranchTableComponent } from './admin/branch-table/branch-table.componen
 
 import { BorrowerComponent } from './borrower/borrower.component';
 import { BookListComponent } from './borrower/book-list/book-list.component';
-import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
-import { BookLoansService } from './borrower/borrower.service';
+import { NgbdSortableHeader} from './borrower/services/sortable.directive'
+import { BookLoansService } from './borrower/services/book-loan.service';
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 

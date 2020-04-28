@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BookListComponent} from './book-list/book-list.component';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { BookLoan } from './entities/bookloan';
-import { BookLoansService } from './borrower.service';
+import { BookLoansService } from './services/book-loan.service';
 
 @Component({
   selector: 'app-borrower',
@@ -21,8 +21,8 @@ export class BorrowerComponent implements OnInit {
   
   getLoans(cardNo: number): void
   {
-    let crdNumStr = cardNo.toString();
-    this.bookLoansService.getBookLoans(crdNumStr)
+    // let crdNumStr = cardNo.toString();
+    this.bookLoansService.getBookLoans(cardNo)
     .subscribe(bookloans => (this.BookLoans = bookloans) ); 
   }
 }

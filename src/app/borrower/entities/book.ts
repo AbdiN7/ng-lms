@@ -1,6 +1,15 @@
-export interface book {
-    id: number;
-    name: string;
-    author: string;
-    lib: string;
+export interface Book {
+    bookId: number;
+    title: string;
+    author: {
+        authorId: number,
+        authorName: string
+    },
+    publisher: {
+      publisherId: number,
+      publisherName: string,
+      publisherAddress: string,
+      publisherPhone: string,
+
+    }
   }

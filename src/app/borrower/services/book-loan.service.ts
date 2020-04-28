@@ -5,8 +5,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { BookLoan } from './entities/bookloan';
-import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
+import { BookLoan } from '../entities/bookloan';
+import { HttpErrorHandler, HandleError } from '../../http-error-handler.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,11 +19,6 @@ export class BookLoansService {
   BookLoanUrl = 'http://localhost:8087/lms/borrower/bookloan/';
   private handleError: HandleError;
 
-  urlWithCardNumber (cardNo: string) : string
-  {
-    let newUrl =`http://localhost:8087/lms/borrower/bookloan/${cardNo}`;
-    return newUrl;
-  }
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
@@ -31,13 +26,15 @@ export class BookLoansService {
   }
 
   /** GET BookLoans from the server */
-  getBookLoans (cardNo: string): Observable<BookLoan[]> {
-    this.BookLoanUrl = this.urlWithCardNumber(cardNo);
-    return this.http.get<BookLoan[]>(this.BookLoanUrl)
+  getBookLoans (cardNo: number): Observable<BookLoan[]> {
+    // this.BookLoanUrl = this.urlWithCardNumber(cardNo);
+    return this.http.get<BookLoan[]>(`${this.BookLoanUrl}/${cardNo}`)
       .pipe(
         catchError(this.handleError('getBookLoans', []))
       );
   }
+
+
 
   searchBookLoans(term: string): Observable<BookLoan[]> {
     
@@ -60,11 +57,13 @@ export class BookLoansService {
       );
   }
 
-  // deleteBookLoan (id: number): Observable<{}> {
-  //   const url = `${this.BookLoanUrl}/${id}`;
-  //   return this.http.delete(url, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('deleteBookLoan'))
-  //     );
-  // }
+  deleteBookLoan (bookloan: BookLoan): Observable<{}> {
+    let cardNo = bookloan.bookLoanKey.borrower.cardNo;
+    let branchId = bookloan.bookLoanKey.branch.branchId;
+    let bookId = bookloan.bookLoanKey.book.bookId;
+    return this.http.delete(`${this.BookLoanUrl}/${cardNo}/branch/${branchId}/bookId/${bookId}`, httpOptions)
+      .pipe(
+        catchError(this.handleError('deleteBookLoan'))
+      );
+  }
 }
