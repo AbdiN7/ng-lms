@@ -1,30 +1,61 @@
 
-<h3>List of Books within a library branch in LMS Application.</h3>
-<button type="button" class="btn btn-primary">Create New Branches</button>
+<h3>List of Library Branches in LMS Application.</h3>
 <div class="ds-l-row ds-u-margin-top--3">
   <div class="ds-l-col--9">
     <ngb-pagination [collectionSize]="totalBranches" [(page)]="pager.currentPage" [maxSize]="5" [boundaryLinks]="true"
       (pageChange)="setPage($event)"></ngb-pagination>
   </div>
 </div>
-
+<div class="ds-l-row ds-u-margin-top--3">
+  Search by Branch: <input type="Text" [(ngModel)]="searchString" (input)="searchBranches()">
+</div>
 <table class="table table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">ID</th>
       <th scope="col">Branch Name</th>
       <th scope="col">Branch Address</th>
-      <th scope="col">Book Copies</th>
+      <th scope="col">Update Branch</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let a of pagedItems | lmsSort ; let i=index">{{a | json}}
+    <tr *ngFor="let a of pagedItems | lmsSort ; let i=index">
+      <!-- {{a | json}} -->
       <th scope="row">{{i+1}}</th>
+      <td>{{a.branchId}}</td>
       <td>{{a.branchName | uppercase}}</td>
       <td>{{a.branchAddress | uppercase}}</td>
-      <td>{{a}}</td>
-      <!-- <td><span *ngFor="let b of a.bookCopies">{{b.book.title}},</span></td> -->
-      <!-- <td><button type="button" class="btn btn-danger" (click)="deleteBook(a)">Delete</button></td> -->
+      <td><button type="button" class="btn btn-primary" (click)="open(editBranchModal, a)">Edit</button></td>
     </tr>
   </tbody>
 </table>
+
+<ng-template #editBranchModal let-c="close" let-d="dismiss">
+  <div class="ds-c-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Number of Copies</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Branch Name:</label>
+            <input class="form-control" name="branchName" [(ngModel)]="selectedBranch.branchName"
+              value={{selectedBranch.branchName}}>
+            <label for="recipient-name" class="col-form-label">Branch Address:</label>
+            <input class="form-control" name="branchAddress" [(ngModel)]="selectedBranch.branchAddress"
+              value={{selectedBranch.branchAddress}}>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateBranch()">Save</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

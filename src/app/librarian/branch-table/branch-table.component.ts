@@ -72,11 +72,25 @@ export class BranchTableComponent implements OnInit {
   //   })
   // }
 
-  // searchBooks(){
-  //   this.httpService.getAll(`http://localhost:8090/lms/readAuthorsByName/${this.searchString}`).subscribe(resp => {
-  //     this.books = resp;
-  //     this.totalBooks = this.books.length;
-  //     this.setPage(1);
-  //   })
-  // }
+  updateBranch(){
+    let body = {
+      "branchId": null,
+      "branchName": this.selectedBranch.branchName,
+      "branchAddress": this.selectedBranch.branchAddress
+  }
+    console.log("Trying to update...");
+    console.log(this.selectedBranch);
+    this.httpService.putObj(`http://localhost:8090/lms/librarian/branch/${this.selectedBranch.branchId}`, body).subscribe(resp => {
+      this.loadAllBranches();
+      this.modalService.dismissAll();
+    })
+  }
+
+  searchBranches(){
+    this.httpService.getAll(`http://localhost:8090/lms/librarian/branch/name/${this.searchString}`).subscribe(resp => {
+      this.branches = resp;
+      this.totalBranches = this.branches.length;
+      this.setPage(1);
+    })
+  }
 }

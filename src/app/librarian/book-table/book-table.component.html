@@ -1,6 +1,5 @@
 
 <h3>List of Books within a library branch in LMS Application.</h3>
-<button type="button" class="btn btn-primary">Create New Branches</button>
 <div class="ds-l-row ds-u-margin-top--3">
   <div class="ds-l-col--9">
     <ngb-pagination [collectionSize]="totalBooks" [(page)]="pager.currentPage" [maxSize]="5" [boundaryLinks]="true"
@@ -14,9 +13,9 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Branch Name</th>
-      <th scope="col">Branch Address</th>
-      <th scope="col">Book Copies</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Publisher</th>
     </tr>
   </thead>
   <tbody>
@@ -24,8 +23,8 @@
       <!-- {{a | json}} -->
       <th scope="row">{{i+1}}</th>
       <td>{{a.title | uppercase}}</td>
-      <td>{{a.branchAddress | uppercase}}</td>
-      <td>{{a}}</td>
+      <td>{{a.author.authorName | uppercase}}</td>
+      <td>{{a.publisher.publisherName | uppercase}}</td>
       <!-- <td><span *ngFor="let b of a.bookCopies">{{b.book.title}},</span></td> -->
       <!-- <td><button type="button" class="btn btn-danger" (click)="deleteBook(a)">Delete</button></td> -->
     </tr>
