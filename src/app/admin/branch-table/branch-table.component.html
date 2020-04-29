@@ -2,6 +2,7 @@
     <div class="form-group form-inline">
         Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
         <span class="ml-3" *ngIf="service.loading$ | async"> <div class="spinner-border text-secondary"></div> </span>
+        <button type="button" class="btn btn-success mr-1" style="margin-left: auto;" (click) = open(createBranchModal)>Add</button>
     </div>
 
     <table class="table table-striped">
@@ -16,7 +17,7 @@
 
         <tbody>
             <tr *ngFor="let branch of branches$ | async; index as i">
-                <th scope="row">{{ i+1 }}</th> <!-- id's can be easily obfuscated with the index above -->
+                <th scope="row">{{ branch.branchId }}</th> <!-- id's can be easily obfuscated with (i + 1) * service.page -->
                 <td>
                     <ngb-highlight [result]="branch.branchName" [term]="service.searchTerm"></ngb-highlight>
                 </td>
@@ -24,7 +25,7 @@
                     <ngb-highlight [result]="branch.branchAddress" [term]="service.searchTerm"></ngb-highlight>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-info mr-1" (click)="updateBranch(branch)">Update</button>
+                    <button type="button" class="btn btn-info mr-1" (click)="open(editBranchModal, branch)">Update</button>
                     <button type="button" class="btn btn-danger ml-1" (click)="deleteBranch(branch)">Delete</button>
                 </td>
             </tr>
@@ -43,3 +44,63 @@
         </select>
     </div>
 </form>
+
+
+<ng-template #editBranchModal let-c="close" let-d="dismiss">
+    <div class="ds-c-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Branch</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="col-form-label">Branch Name:</label> <!-- for="recipient-name" -->
+                        <input class="form-control" name="branchName" [(ngModel)]="selectedBranch.branchName" value={{selectedBranch.branchName}}>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Branch Address:</label> <!-- for="recipient-name" -->
+                        <input class="form-control" name="branchAddress" [(ngModel)]="selectedBranch.branchAddress" value={{selectedBranch.branchAddress}}>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c()">Close</button>
+                <button type="button" class="btn btn-info" (click)="updateBranch(selectedBranch)">Save</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #createBranchModal let-c="close" let-d="dismiss">
+    <div class="ds-c-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Branch</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="col-form-label">Branch Name:</label> <!-- for="recipient-name" -->
+                        <input class="form-control" name="branchName" [(ngModel)]="createdBranch.branchName">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Branch Address:</label> <!-- for="recipient-name" -->
+                        <input class="form-control" name="branchAddress" [(ngModel)]="createdBranch.branchAddress">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c()">Close</button>
+                <button type="button" class="btn btn-info" (click)="createBranch(createdBranch)">Save</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

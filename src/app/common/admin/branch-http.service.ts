@@ -26,7 +26,7 @@ export class BranchHttpService {
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _branches$ = new BehaviorSubject<Branch[]>([]);
+  public _branches$ = new BehaviorSubject<Branch[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
 
@@ -37,20 +37,6 @@ export class BranchHttpService {
   };
 
   constructor(private http: HttpClient ) {
-    // Get the branches from the api
-    this.http.get<Branch[]>('http://localhost:8100/lms/admin/branch').subscribe(resp => {
-      this._ALL_BRANCHES$.next(resp);
-
-      // console.log("filling with dummy data with ID's >2000 to be big...")
-      // for(let i = 2000; i<2100; ++i){
-      //   this._ALL_BRANCHES$.getValue().push({
-      //     branchId: i,
-      //     branchName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-      //     branchAddress: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-      //   });
-      // }
-    });
-
     this._search$.pipe(
       tap(() => this._loading$.next(true)), // set loading to true
       debounceTime(200),                    // for 200ms, only emit if the api responds within 200ms (effectively)
@@ -64,24 +50,85 @@ export class BranchHttpService {
     this._search$.next();
   }
 
-  deleteById(branchId: number){
-    this.http.delete('http://localhost:8100/lms/admin/branch/' + branchId).subscribe( res => {
+  getBranches(){
+    // Get the branches from the api
+    this.http.get<Branch[]>('http://localhost:8100/lms/admin/branch').subscribe(resp => {
+      this._ALL_BRANCHES$.next(resp);
+    });
+  }
+
+  createBranch(branch: Branch){
+    this.http.post<Branch>('http://localhost:8100/lms/admin/branch/', {branchName: branch.branchName, branchAddress: branch.branchAddress}, 
+                    {"headers" : {'Content-Type':  'application/json'}}).subscribe( res => {
+      console.log(res);
+      // add to storage array
+      this._ALL_BRANCHES$.getValue().push(res);
+
+      //add to _branches$ if len is < 10
+      if( this._branches$.getValue().length < this.pageSize) {
+        this._branches$.getValue().push(res);
+      }
+
+      // update total
+      this._total$.next(this._ALL_BRANCHES$.getValue().length);
+    });
+  }
+
+  // DELETE BUTTON
+  deleteBranch(branch: Branch){
+    this.http.delete('http://localhost:8100/lms/admin/branch/' + branch.branchId).subscribe( res => {
       // remove from storage array
       this._ALL_BRANCHES$.next( 
         this._ALL_BRANCHES$.getValue().filter(ele => {
-        return ele.branchId !== branchId
+        return ele.branchId !== branch.branchId
         })
       );
 
-      // remove from the array async piped to the table
+      console.log(this.searchTerm)
+      console.log(this._branches$.getValue());
+      // remove from the array bound to the table
       this._branches$.next(
         this._branches$.getValue().filter(ele => {
-          return ele.branchId !== branchId
+          return ele.branchId !== branch.branchId
           })
       );
+      console.log(this._branches$.getValue());
 
-      // re-paginate to bring in a new row
+      // update the total number of records
       this._total$.next(this._ALL_BRANCHES$.getValue().length);
+      
+      // re-paginate the table (investigate for better solutions)
+      let index  = (this.page * this.pageSize) - 1 // get the index of the next element which isnt shown on the table
+
+      if (index < this._ALL_BRANCHES$.getValue().length && this.searchTerm == ''){ // if the index isnt out of bounds AND if we are not currently searching
+        this._branches$.getValue().push(this._ALL_BRANCHES$.getValue()[index]); // push a new element
+      }
+    });
+  }
+
+  updateBranch(branch: Branch){
+    const updatedBranch = {
+      branchId: null, // must be null for the api to accept
+      branchAddress: branch.branchAddress,
+      branchName: branch.branchName
+    }
+
+    this.http.put('http://localhost:8100/lms/admin/branch/' + branch.branchId, updatedBranch).subscribe( res => {
+      // update the storage array
+      this._ALL_BRANCHES$.getValue().forEach( ele => {
+        if(ele.branchId == branch.branchId){
+          ele.branchAddress = branch.branchAddress;
+          ele.branchName = branch.branchName;
+        }
+      });
+
+      // update the array which is bound to the table
+      this._branches$.getValue().forEach( ele => {
+        if(ele.branchId == branch.branchId){
+          ele.branchAddress = branch.branchAddress;
+          ele.branchName = branch.branchName;
+        }
+      });
     });
   }
 
