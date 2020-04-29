@@ -9,6 +9,7 @@ import { Book } from '../entities/book';
 import { HttpErrorHandler, HandleError } from '../../http-error-handler.service';
 import {SortColumn, SortDirection} from '../services/sortable.directive';
 import { DecimalPipe } from '@angular/common';
+import { BookCopy } from '../entities/book-copy';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ const httpOptions = {
 
 let myBooks; // CHANGE ThIS
 interface SearchResult {
-    books: Book[];
+    bookcopies: BookCopy[];
     total: number;
   }
   
@@ -29,21 +30,21 @@ interface SearchResult {
     sortColumn: SortColumn;
     sortDirection: SortDirection;
   }
-  function matches(book: Book, term: string, pipe: PipeTransform) {
-    return book.title.toLowerCase().includes(term.toLowerCase()) 
-    || book.author.authorName.toLowerCase().includes(term.toLowerCase())
-    || book.publisher.publisherName.toLowerCase().includes(term.toLowerCase());
+  function matches(bookcopy: BookCopy, term: string, pipe: PipeTransform) {
+    return bookcopy.bookCopyKey.book.title.toLowerCase().includes(term.toLowerCase()) 
+    || bookcopy.bookCopyKey.book.author.authorName.toLowerCase().includes(term.toLowerCase())
+    || bookcopy.bookCopyKey.book.publisher.publisherName.toLowerCase().includes(term.toLowerCase());
       // || pipe.transform(book.publisher.publisherName).includes(term);
       // || pipe.transform(book.publisher.publisherName).includes(term);
   }
   const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
   
-  function sort(books: Book[], column: SortColumn, direction: string): Book[] {
+  function sort(bookcopies: BookCopy[], column: SortColumn, direction: string): BookCopy[] {
     
     if (direction === '' || column === '') {
-      return books;
+      return bookcopies;
     } else {
-      return [...books].sort((a, b) => {
+      return [...bookcopies].sort((a, b) => {
         const res = compare(`${a[column]}`, `${b[column]}`);
         return direction === 'asc' ? res : -res;
       });
@@ -58,7 +59,7 @@ export class BooksService {
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _books$ = new BehaviorSubject<Book[]>([]);
+  private _bookcopy$ = new BehaviorSubject<BookCopy[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -74,11 +75,34 @@ export class BooksService {
     private pipe: DecimalPipe) {
     this.handleError = httpErrorHandler.createHandleError('BooksService');
     
-    this.http.get<Book[]>('http://localhost:8087/lms/borrower/book').subscribe(resp => {
-      this._books$.next(resp);
-      myBooks = this._books$.value;
+    // this.http.get<Book[]>('http://localhost:8087/lms/borrower/book').subscribe(resp => {
+    //   this._books$.next(resp);
+    //   myBooks = this._books$.value;
+    // });
+    //     if(this._books$.value)
+    //     {
+    //       this._search$.pipe(
+    //         tap(() => this._loading$.next(true)),
+    //         debounceTime(200),
+    //         switchMap(() => this._search()),
+    //         delay(200),
+            
+    //         tap(() => this._loading$.next(false))
+    //       ).subscribe(result => {
+    //         this._books$.next(result.books);
+    //         this._total$.next(result.total);
+    //       });
+    //     this._search$.next();
+    //     }
+        
+  }
+
+  getBooksById(branchId) {
+    this.http.get<BookCopy[]>(`http://localhost:8087/lms/borrower/bookcopy/${branchId}`).subscribe(resp => {
+      this._bookcopy$.next(resp);
+      myBooks = this._bookcopy$.value;
     });
-        if(this._books$.value)
+        if(this._bookcopy$.value)
         {
           this._search$.pipe(
             tap(() => this._loading$.next(true)),
@@ -88,13 +112,12 @@ export class BooksService {
             
             tap(() => this._loading$.next(false))
           ).subscribe(result => {
-            this._books$.next(result.books);
+            this._bookcopy$.next(result.bookcopies);
             this._total$.next(result.total);
           });
         this._search$.next();
         }
-        
-  }
+      }
 
   /** GET Books from the server */
   getBooks (): Observable<Book[]> {
@@ -103,7 +126,7 @@ export class BooksService {
         catchError(this.handleError('getBooks', []))
       );
   }
-get books$() { return this._books$.asObservable(); }
+get bookcopies$() { return this._bookcopy$.asObservable(); }
 get total$() { return this._total$.asObservable(); }
 get loading$() { return this._loading$.asObservable(); }
 get page() { return this._state.page; }
@@ -132,14 +155,14 @@ private _search(): Observable<SearchResult> {
     //     console.log(allBooks)
     // }
     
-    let books = sort(myBooks, sortColumn, sortDirection);
+    let bookcopies = sort(myBooks, sortColumn, sortDirection);
     // 2. filter
-    books = books.filter(book => matches(book, searchTerm, this.pipe));
-    const total = books.length;
+    bookcopies = bookcopies.filter(bookcopy => matches(bookcopy, searchTerm, this.pipe));
+    const total = bookcopies.length;
 
     // 3. paginate
-    books = books.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({books, total});
+    bookcopies = bookcopies.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    return of({bookcopies, total});
   }
   // deleteBook (id: number): Observable<{}> {
   //   const url = `${this.BookUrl}/${id}`;

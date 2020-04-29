@@ -1,39 +1,52 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <form>
-    <div>
-    <div class="form-group form-inline">
-        Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
-        <!-- <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span> -->
-      <span class="ml-3" *ngIf="service.loading$ | async"> 
-        <div class="spinner-border text-secondary"></div> 
-      </span>
-    </div>
+    <div >
+      <div class="cardInput">
 
     <div class="form-group form-inline">
       <input #cardNo placeholder="Card Number" aria-label="cardNumber" aria-describedby="basic-addon1">
       
-      <button (click)="getBorrower(cardNo.value) " ngbDropdownItem > Get Card Number </button>
+      <button type="button" id="buttonInput" class="btn btn-primary" (click)="getBorrower(cardNo.value) " > Get Card Number </button>
+      <div class="showInput">
+
+      <p> Current Card Number: {{borrower()}} </p>
     </div>
+
+    </div>
+  </div>
+
+<div class="container">
 
     <div class="row">
       <div class="col">
+
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+          <button class="btn btn-outline-danger" id="dropdownBasic1" ngbDropdownToggle>Select a Library Branch</button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <button (click)="logBranch(branch)" ngbDropdownItem *ngFor="let branch of Branches"> 
               <span class="badge"> {{branch.branchName}}</span> </button>
           </div>
         </div>
-      </div>
-      </div>
-<!--     
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor = "let branch of Branches">
-        <span class="badge">{{branch.branchName}}</span>
-      </li>
-    </ul> -->
 
+      </div>
+      <div class="col">
+    <!-- <div class="form-group form-inline"> -->
+      <input type="text" class="form-control" placeholder="Search for...." aria-label="search" aria-describedby="basic-addon2" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+      <!-- <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span> -->
+
+  </div>
+  <div class="col">
+    <!-- <div class="input-group-append"> -->
+      <!-- <span class="input-group-text" id="basic-addon2" *ngIf="service.loading$ | async">  -->
+        <!-- <div class="spinner-border text-secondary"> </div>  -->
+      <!-- </span> -->
+    <!-- </div> -->
+  </div>
+
+  <!-- </div> -->
+</div>
+</div>
 
     
     <table class="table table-striped">
@@ -46,16 +59,16 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let book of books$ | async; index as i ">
+      <tr *ngFor="let bookcopy of bookcopies$ | async; index as i ">
         <th scope="row">{{ i+1}}</th>
         <td>
-          <ngb-highlight [result]="book.title" [term]="service.searchTerm"></ngb-highlight>
+          <ngb-highlight [result]="bookcopy.bookCopyKey.book.title" [term]="service.searchTerm"></ngb-highlight>
         </td>
-        <td><ngb-highlight [result]="book.author.authorName " [term]="service.searchTerm"></ngb-highlight>
+        <td><ngb-highlight [result]="bookcopy.bookCopyKey.book.author.authorName " [term]="service.searchTerm"></ngb-highlight>
         </td>
-        <td><ngb-highlight [result]="book.publisher.publisherName " [term]="service.searchTerm"></ngb-highlight></td>
+        <td><ngb-highlight [result]="bookcopy.bookCopyKey.book.publisher.publisherName " [term]="service.searchTerm"></ngb-highlight></td>
         <td>
-          <button type="button" class="btn btn-info mr-1" (click)="logBookButton(book)" >Checkout book</button>
+          <button type="button" class="btn btn-info mr-1" (click)="logBookButton(bookcopy)" >Checkout book</button>
  
         </td>
       </tr>

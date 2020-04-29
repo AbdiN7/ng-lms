@@ -25,7 +25,7 @@ import { tick } from '@angular/core/testing';
 })
 
 export class BookListComponent implements OnInit {
-  books$: Observable<Book[]>;
+  bookcopies$: Observable<BookCopy[]>;
   total$: Observable<number>;
   Books: Book[];
   BookCopy: BookCopy;
@@ -42,7 +42,7 @@ export class BookListComponent implements OnInit {
     public branchService: BranchService,
     public bookLoanService: BookLoansService,
     private router: Router) {
-    this.books$ = service.books$;
+    this.bookcopies$ = service.bookcopies$;
     this.total$ =  service.total$;
     
     
@@ -89,10 +89,10 @@ export class BookListComponent implements OnInit {
     this.bookLoanService.addBookLoan(this.currBook, this.currBranch , this.cardNo).subscribe()
     this.router.navigate(['/lms/borrower'])
   }
-  logBranch(e)
+  logBranch(e: Branch)
   {
     this.currBranch = e;
-    this.bookCopyService.getBookCopy(this.currBranch.branchId)
+    this.service.getBooksById(e.branchId);
     console.log(e)
   }
   getBorrower(cardNo: number) : void
@@ -100,6 +100,10 @@ export class BookListComponent implements OnInit {
     this.cardNo = cardNo;
     this.bookLoanService.getBookLoans(cardNo)
     .subscribe(bookloans => (this.BookLoans = bookloans) ); 
+  }
+  borrower(): string
+  {
+    return this.cardNo
   }
 
 
