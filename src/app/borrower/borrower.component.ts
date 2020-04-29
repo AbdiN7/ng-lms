@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {BookListComponent} from './book-list/book-list.component';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { BookLoan } from './entities/bookloan';
+import { BookLoan } from './entities/book-loan';
 import { BookLoansService } from './services/book-loan.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-borrower',
@@ -11,18 +11,30 @@ import { BookLoansService } from './services/book-loan.service';
   styleUrls: ['./borrower.component.css']
 })
 export class BorrowerComponent implements OnInit {
-  BookLoans: BookLoan[];
+  // BookLoans$: BookLoan[];
+  _BookLoans$: Observable<BookLoan[]>
+  BookLoans$: BookLoan[]
+  total$: Observable<number>
 
-  constructor(private bookLoansService: BookLoansService)  {}
+  constructor(private bookLoansService: BookLoansService)  {
+    this._BookLoans$ = bookLoansService.bookloans$
+    this.total$ = bookLoansService.total$;
+  }
   ngOnInit(): void {
-    if(!this.BookLoans)
-    {console.log("nothing to show")}
   }
   
   getLoans(cardNo: number): void
   {
-    // let crdNumStr = cardNo.toString();
-    this.bookLoansService.getBookLoans(cardNo)
-    .subscribe(bookloans => (this.BookLoans = bookloans) ); 
+    console.log(this._BookLoans$)
+    const newloan = this.bookLoansService.getBookLoans(cardNo)
+    .subscribe(bookloans => (this.BookLoans$ = bookloans) ); 
+  }
+  delete(bookloan: BookLoan)
+  {
+    this.BookLoans$ = this.BookLoans$.filter( bl => bl!= bookloan );
+    this.bookLoansService.deleteBookLoan(bookloan).subscribe();
+
+    // this.bookLoansService.deleteBookLoan(e);
+    // console.log(this.BookLoans$);
   }
 }

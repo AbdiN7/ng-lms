@@ -68,12 +68,6 @@ export class BooksService {
     sortColumn: '',
     sortDirection: ''
   };
-
-//   urlWithCardNumber (cardNo: string) : string
-//   {
-//     let newUrl =`http://localhost:8087/lms/borrower/book/${cardNo}`;
-//     return newUrl;
-//   }
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler, 
@@ -109,25 +103,6 @@ export class BooksService {
         catchError(this.handleError('getBooks', []))
       );
   }
-
-
-
-
-//   searchBooks(term: string): Observable<Book[]> {
-    
-//     term = term.trim();
-
-//     // Add safe, URL encoded search parameter if there is a search term
-//     const options = term ?
-//      { params: new HttpParams().set('cardNo', term) } : {};
-
-//     return this.http.get<Book[]>(this.BookUrl, options)
-//       .pipe(
-//         catchError(this.handleError<Book[]>('searchBooks', []))
-//       );
-//   }
-
-
 get books$() { return this._books$.asObservable(); }
 get total$() { return this._total$.asObservable(); }
 get loading$() { return this._loading$.asObservable(); }

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <form>
     <div>
@@ -9,19 +10,32 @@
       </span>
     </div>
 
+    <div class="form-group form-inline">
+      <input #cardNo placeholder="Card Number" aria-label="cardNumber" aria-describedby="basic-addon1">
+      
+      <button (click)="getBorrower(cardNo.value) " ngbDropdownItem > Get Card Number </button>
+    </div>
+
     <div class="row">
       <div class="col">
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>select library</button>
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button ngbDropdownItem>Action - 1</button>
-            <button ngbDropdownItem>Another Action</button>
-            <button ngbDropdownItem>Something else is here</button>
+            <button (click)="logBranch(branch)" ngbDropdownItem *ngFor="let branch of Branches"> 
+              <span class="badge"> {{branch.branchName}}</span> </button>
           </div>
         </div>
       </div>
-    </div>
-  
+      </div>
+<!--     
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor = "let branch of Branches">
+        <span class="badge">{{branch.branchName}}</span>
+      </li>
+    </ul> -->
+
+
+    
     <table class="table table-striped">
       <thead>
       <tr>
