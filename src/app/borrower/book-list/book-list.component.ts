@@ -70,23 +70,12 @@ export class BookListComponent implements OnInit {
 
   }
   
-  logBookButton(e : Book)
+  logBookButton(e : BookCopy)
   {
 
-    this.currBook = e;
-    console.log(e)
-    // this.currBookLoan.bookLoanKey.book = this.currBook;
-    // this.currBookLoan.bookLoanKey.borrower.cardNo = 1;
-    // this.currBookLoan.bookLoanKey.branch = this.currBranch
-
-    // this.BookLoans = this.BookLoans.filter(bl => bl != e);
-    // this.BookLoans$ = this.BookLoans$.filter( bl => bl!= bookloan );
-    this.BookLoans.filter( bl => { 
-      bl.bookLoanKey.book.bookId == e.bookId ? this.Books.pop(): console.log('nope')
-    }  )
-      console.log(this.Books)
-      console.log(this.BookLoans)
-    this.bookLoanService.addBookLoan(this.currBook, this.currBranch , this.cardNo).subscribe()
+    this.currBook = e.bookCopyKey.book;
+    console.log(this.cardNo)
+    this.bookLoanService.addBookLoan(this.currBook, this.currBranch , this.cardNo)
     this.router.navigate(['/lms/borrower'])
   }
   logBranch(e: Branch)

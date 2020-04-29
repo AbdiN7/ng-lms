@@ -45,7 +45,8 @@ get allbookloans$() { return this._ALL_BOOK_LOANS$.asObservable(); }
       );
   }
 
-  addBookLoan (book: Book, branch: Branch, cardNo: number): Observable<BookLoan> {
+  addBookLoan (book: Book, branch: Branch, cardNo: number): Observable<any> {
+    let bLoan: BookLoan;
     const data = {
       'bookLoanKey': {
         book,
@@ -58,10 +59,11 @@ get allbookloans$() { return this._ALL_BOOK_LOANS$.asObservable(); }
       console.log(data)
      this.http.post<BookLoan>(this.BookLoanUrl, data, httpOptions).subscribe( res => 
       console.log("Add Reached"))
-    return this.http.post<BookLoan>(this.BookLoanUrl, data, httpOptions)
-      // .pipe(
-      //   catchError(this.handleError('addBookLoan', BookLoan))
-      // );
+      return 
+    // return this.http.post<BookLoan>(this.BookLoanUrl, data, httpOptions)
+    //   .pipe(
+    //     catchError(this.handleError('addBookLoan', []))
+    //   );
   }
 
   deleteBookLoan (bookloan: BookLoan): Observable<{}> {
