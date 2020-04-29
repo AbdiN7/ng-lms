@@ -21,6 +21,11 @@ import { LibBookTableComponent } from './librarian/lib-book-table/lib-book-table
 import { LibBookCopyTableComponent } from './librarian/lib-book-copy-table/lib-book-copy-table.component';
 
 import { BranchTableComponent } from './admin/branch-table/branch-table.component';
+import { AuthorTableComponent } from './admin/author-table/author-table.component';
+import { PublisherTableComponent } from './admin/publisher-table/publisher-table.component';
+import { BorrowerTableComponent } from './admin/borrower-table/borrower-table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BranchHttpService } from './common/admin/branch-http.service';
 
 import { BorrowerComponent } from './borrower/borrower.component';
 import { BookListComponent } from './borrower/book-list/book-list.component';
@@ -34,6 +39,10 @@ import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
     HomeComponent,
     LayoutComponent,
     AdminComponent,
+    BranchTableComponent,
+    AuthorTableComponent,
+    PublisherTableComponent,
+    BorrowerTableComponent,
     LibBranchTableComponent,
     LibrarianComponent,
     LmsSortPipe,
@@ -50,11 +59,11 @@ import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
     CommonModule,
     HttpClientModule,
     HttpClientModule,
+    NgbModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgbModule
+    ReactiveFormsModule
   ],
-  providers: [LmshttpService, PagerService],
+  providers: [BranchHttpService, LmshttpService, PagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
