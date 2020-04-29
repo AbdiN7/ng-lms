@@ -2,7 +2,7 @@
     <div class="form-group form-inline">
         Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
         <span class="ml-3" *ngIf="service.loading$ | async"> <div class="spinner-border text-secondary"></div> </span>
-        <button type="button" class="btn btn-success mr-1" style="margin-left: auto;" (click) = open(createBranchModal)>Add</button>
+        <button type="button" class="btn btn-success mr-1" style="margin-left: auto;" (click) = openCreateModal(createBranchModal)>Add</button>
     </div>
 
     <table class="table table-striped">
@@ -25,7 +25,7 @@
                     <ngb-highlight [result]="branch.branchAddress" [term]="service.searchTerm"></ngb-highlight>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-info mr-1" (click)="open(editBranchModal, branch)">Update</button>
+                    <button type="button" class="btn btn-info mr-1" (click)="openUpdateModal(editBranchModal, branch)">Update</button>
                     <button type="button" class="btn btn-danger ml-1" (click)="deleteBranch(branch)">Delete</button>
                 </td>
             </tr>

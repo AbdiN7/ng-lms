@@ -55,8 +55,22 @@ export class BranchTableComponent implements OnInit {
     this.service.deleteBranch(branch);
   }
 
-  open(content, branch) {
+  openUpdateModal(content, branch) {
     this.selectedBranch = branch;
+    this.modalRef = this.modalService.open(content);
+    this.modalRef.result.then(
+      result => {
+        this.errMsg = '';
+        this.closeResult = `Closed with ${result}`;
+      },
+      reason => {
+        this.errMsg = '';
+        this.closeResult = `Dismissed`
+      }
+    )
+  }
+
+  openCreateModal(content) {
     this.modalRef = this.modalService.open(content);
     this.modalRef.result.then(
       result => {
