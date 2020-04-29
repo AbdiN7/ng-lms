@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -51,7 +50,7 @@ import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
     CommonModule,
     HttpClientModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
     ReactiveFormsModule,
     NgbModule
   ],
