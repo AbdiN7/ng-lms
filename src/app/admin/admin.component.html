@@ -1,58 +1,31 @@
-<!-- one row, two columns- left col is a navbar, right col is the content which is dependent on which button is selected -->
-
-<!--
-<div style="overflow-x: hidden;">
-    <div class="row no-gutters">
-        <div class="col-sm-1" >
-            <div class="btn-group-vertical" style="width: 100%;">
-                <button type="button" class="btn btn-secondary" >Branches</button>
-                <button type="button" class="btn btn-secondary" >Authors</button>
-                <button type="button" class="btn btn-secondary" >Publishers</button>
-                <button type="button" class="btn btn-secondary" >Borrowers</button>
-                
-            </div>
-        </div>
-
-        <div class="col-sm-11">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-</div>
--->
-
 <div class="d-flex" style="margin-top: 4em;">
-    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-      <li ngbNavItem="Branches">
-        <a ngbNavLink >Branches</a>
-        <ng-template ngbNavContent>
-          <p> Branches Datatable </p>
-            <app-branch-table></app-branch-table>
-        </ng-template>
-      </li>
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+    <li ngbNavItem="Books">
+      <a ngbNavLink >Books</a>
+      <ng-template ngbNavContent>
+      </ng-template>
+    </li>
 
-      <li ngbNavItem="Authors">
-        <a ngbNavLink>Authors</a>
-        <ng-template ngbNavContent>
-          <p> Authors Datatable </p>
-        </ng-template>
-      </li>
+    <li ngbNavItem="BookCopies">
+      <a ngbNavLink>BookCopies</a>
+      <ng-template ngbNavContent>
+      </ng-template>
+    </li>
 
-      <li ngbNavItem="Publishers">
-        <a ngbNavLink>Publishers</a>
-        <ng-template ngbNavContent>
-          <p> Publishers Datatable </p>
-        </ng-template>
-      </li>
+    <li ngbNavItem="Publishers">
+      <a ngbNavLink>Publishers</a>
+      <ng-template ngbNavContent>
+        <p> Publishers Datatable </p>
+      </ng-template>
+    </li>
 
-      <li ngbNavItem="Borrowers">
-        <a ngbNavLink>Borrowers</a>
-        <ng-template ngbNavContent>
-          <p> Borrowers Datatable </p>
-        </ng-template>
-      </li>
-    </ul>
-  
-    <div [ngbNavOutlet]="nav" class="ml-4"></div>
-  </div>
-  
-  <!-- <pre>Active: {{ active }}</pre> -->
+    <li ngbNavItem="Borrowers">
+      <a ngbNavLink>Borrowers</a>
+      <ng-template ngbNavContent>
+        <p> Borrowers Datatable </p>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ml-4"></div>
+</div>
