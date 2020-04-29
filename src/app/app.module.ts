@@ -29,7 +29,10 @@ import { BranchHttpService } from './common/admin/branch-http.service';
 
 import { BorrowerComponent } from './borrower/borrower.component';
 import { BookListComponent } from './borrower/book-list/book-list.component';
-import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
+import { NgbdSortableHeader} from './borrower/services/sortable.directive'
+import { BookLoansService } from './borrower/services/book-loan.service';
+import { HttpErrorHandler } from './http-error-handler.service';
+import { MessageService } from './message.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,7 @@ import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [BranchHttpService, LmshttpService, PagerService],
+  providers: [BranchHttpService, LmshttpService, PagerService, HttpErrorHandler, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

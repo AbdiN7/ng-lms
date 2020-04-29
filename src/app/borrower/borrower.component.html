@@ -1,4 +1,53 @@
 <p>borrower works!</p>
 
+<label>Input card Number:
+  <input #cardNo/>
+</label>
+<button type="button" class="btn btn-primary" (click)="getLoans(cardNo.value); cardNo.value=''">Input card Number</button>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col" >Book Title</th>
+    <th scope="col" >Author Name</th>
+    <th scope="col">Publisher Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let bookloan of BookLoans$ ; index as i ">
+    <th scope="row">{{ i+1}}</th>
+    <td>
+      <ngb-highlight [result]="bookloan.bookLoanKey.book.title" ></ngb-highlight>
+    </td>
+    <td><ngb-highlight [result]="bookloan.bookLoanKey.book.author.authorName " ></ngb-highlight>
+    </td>
+    <td><ngb-highlight [result]="bookloan.bookLoanKey.book.publisher.publisherName "></ngb-highlight></td>
+    <td>
+      <button  type="button" class="btn btn-danger" (click)="delete(bookloan)" >return book</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 
+
+<div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Want More Books?</h5>
+    <p class="card-text">Go to Library Page to find the perfect book for you.</p>
+<button type="button" class="btn btn-success" [routerLink]="['/lms/borrower/booklist']">Go To the Library</button >
+<!-- <button class="nav-item nav-link-edit" [routerLink]="['/lms/borrower/booklist']">book List</button > -->
+
+  </div>
+</div>
+
+
+<!-- Spinner -->
+<!-- <span class="ml-3" *ngIf="service.loading$ | async"> 
+  <div class="spinner-border text-secondary"></div> 
+</span> -->
