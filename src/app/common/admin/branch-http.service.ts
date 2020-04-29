@@ -60,7 +60,6 @@ export class BranchHttpService {
   createBranch(branch: Branch){
     this.http.post<Branch>('http://localhost:8100/lms/admin/branch/', {branchName: branch.branchName, branchAddress: branch.branchAddress}, 
                     {"headers" : {'Content-Type':  'application/json'}}).subscribe( res => {
-      console.log(res);
       // add to storage array
       this._ALL_BRANCHES$.getValue().push(res);
 
@@ -84,15 +83,12 @@ export class BranchHttpService {
         })
       );
 
-      console.log(this.searchTerm)
-      console.log(this._branches$.getValue());
       // remove from the array bound to the table
       this._branches$.next(
         this._branches$.getValue().filter(ele => {
           return ele.branchId !== branch.branchId
           })
       );
-      console.log(this._branches$.getValue());
 
       // update the total number of records
       this._total$.next(this._ALL_BRANCHES$.getValue().length);
