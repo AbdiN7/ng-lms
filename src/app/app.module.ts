@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,11 @@ import { PagerService } from './common/pager.service';
 import { LibBookTableComponent } from './librarian/lib-book-table/lib-book-table.component';
 import { LibBookCopyTableComponent } from './librarian/lib-book-copy-table/lib-book-copy-table.component';
 
+import { BranchTableComponent } from './admin/branch-table/branch-table.component';
+
+import { BorrowerComponent } from './borrower/borrower.component';
+import { BookListComponent } from './borrower/book-list/book-list.component';
+import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
 
 @NgModule({
   declarations: [
@@ -33,14 +40,20 @@ import { LibBookCopyTableComponent } from './librarian/lib-book-copy-table/lib-b
     LmsSortPipe,
     LibBookTableComponent,
     LibBookCopyTableComponent,
+    BranchTableComponent,
+    NgbdSortableHeader,
+    BorrowerComponent,
+    BookListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     HttpClientModule,
-    NgbModule,
     HttpClientModule,
     FormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [LmshttpService, PagerService],
   bootstrap: [AppComponent]
