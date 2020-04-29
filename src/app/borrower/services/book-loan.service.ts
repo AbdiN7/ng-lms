@@ -70,7 +70,6 @@ get allbookloans$() { return this._ALL_BOOK_LOANS$.asObservable(); }
     let cardNo = bookloan.bookLoanKey.borrower.cardNo;
     let branchId = bookloan.bookLoanKey.branch.branchId;
     let bookId = bookloan.bookLoanKey.book.bookId;
-    console.log(bookloan)
     return this.http.delete(`${this.BookLoanUrl}/${cardNo}/branch/${branchId}/bookId/${bookId}`, httpOptions)
       .pipe(
         catchError(this.handleError('deleteBookLoan'))

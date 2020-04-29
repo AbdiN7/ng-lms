@@ -74,7 +74,6 @@ export class BookListComponent implements OnInit {
   {
 
     this.currBook = e.bookCopyKey.book;
-    console.log(this.cardNo)
     this.bookLoanService.addBookLoan(this.currBook, this.currBranch , this.cardNo)
     this.router.navigate(['/lms/borrower'])
   }
@@ -82,7 +81,6 @@ export class BookListComponent implements OnInit {
   {
     this.currBranch = e;
     this.service.getBooksById(e.branchId);
-    console.log(e)
   }
   getBorrower(cardNo: number) : void
   {

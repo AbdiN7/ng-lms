@@ -29,7 +29,6 @@ export class BookCopyService {
   /** GET BookLoans from the server */
   getBookCopy (branchId: number): Observable<BookCopy[]> {
     // this.BookLoanUrl = this.urlWithCardNumber(cardNo);
-     console.log(branchId)
     //  this.http.get<BookCopy[]>(`${this.BookCopyUrl}/${branchId}`).subscribe( res => console.log("Book Copy GET"))
      return this.http.get<BookCopy[]>(`${this.BookCopyUrl}${branchId}`)
     //   .pipe(
