@@ -12,7 +12,20 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AdminComponent } from './admin/admin.component';
+import { LibBranchTableComponent } from './librarian/lib-branch-table/lib-branch-table.component';
+import { LibrarianComponent } from './librarian/librarian.component';
+import { LmshttpService } from './common/lmshttp.service';
+import { LmsSortPipe } from './common/pipes/lms-sort.pipe';
+import { PagerService } from './common/pager.service';
+import { LibBookTableComponent } from './librarian/lib-book-table/lib-book-table.component';
+import { LibBookCopyTableComponent } from './librarian/lib-book-copy-table/lib-book-copy-table.component';
+
 import { BranchTableComponent } from './admin/branch-table/branch-table.component';
+import { AuthorTableComponent } from './admin/author-table/author-table.component';
+import { PublisherTableComponent } from './admin/publisher-table/publisher-table.component';
+import { BorrowerTableComponent } from './admin/borrower-table/borrower-table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BranchHttpService } from './common/admin/branch-http.service';
 
 import { BorrowerComponent } from './borrower/borrower.component';
 import { BookListComponent } from './borrower/book-list/book-list.component';
@@ -30,6 +43,15 @@ import { MessageService } from './message.service';
     LayoutComponent,
     AdminComponent,
     BranchTableComponent,
+    AuthorTableComponent,
+    PublisherTableComponent,
+    BorrowerTableComponent,
+    LibBranchTableComponent,
+    LibrarianComponent,
+    LmsSortPipe,
+    LibBookTableComponent,
+    LibBookCopyTableComponent,
+    BranchTableComponent,
     NgbdSortableHeader,
     BorrowerComponent,
     BookListComponent,
@@ -38,12 +60,13 @@ import { MessageService } from './message.service';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    NgbModule
+    HttpClientModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [ HttpErrorHandler, MessageService],
+  providers: [BranchHttpService, LmshttpService, PagerService, HttpErrorHandler, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

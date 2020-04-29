@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ng-lms"
+    }
+  },
+  "defaultProject": "ng-lms",
+  "cli": {
+    "analytics": "fd0cd516-4030-4fa6-a8dc-a9ed13ae2816"
+  }
 }
