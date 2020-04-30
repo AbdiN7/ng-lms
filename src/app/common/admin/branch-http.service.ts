@@ -63,12 +63,12 @@ export class BranchHttpService {
       // add to storage array
       this._ALL_BRANCHES$.getValue().push(res);
 
-      //add to _branches$ if len is < 10
-      if( this._branches$.getValue().length < this.pageSize) {
+      //add to _branches$ if len is < 10 and if it applies to the current search
+      if( this._branches$.getValue().length < this.pageSize && matches(res, this.searchTerm)) {
         this._branches$.getValue().push(res);
       }
 
-      // update total
+      // update total (this effects the pagination buttons)
       this._total$.next(this._ALL_BRANCHES$.getValue().length);
     });
   }
@@ -90,7 +90,7 @@ export class BranchHttpService {
           })
       );
 
-      // update the total number of records
+      // update the total number of records (this effects the pagination buttons)
       this._total$.next(this._ALL_BRANCHES$.getValue().length);
       
       // re-paginate the table (investigate for better solutions)
