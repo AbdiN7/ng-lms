@@ -22,12 +22,14 @@ function matches(branch: Branch, term: string) {
 
 @Injectable({providedIn: 'root'})
 export class BranchHttpService {
+  // Effectively a storage array, so i only call the api once and eveyrthing after that is local (ofc excluding create update and delete)
   private _ALL_BRANCHES$ = new BehaviorSubject<Branch[]>([]);
+  private _total$ = new BehaviorSubject<number>(0); // total of the above array
 
+  // this is the array which is displayed on the table, its length is <= pageSize
+  public _branches$ = new BehaviorSubject<Branch[]>([]);
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  public _branches$ = new BehaviorSubject<Branch[]>([]);
-  private _total$ = new BehaviorSubject<number>(0);
 
 
   private _state: State = {
