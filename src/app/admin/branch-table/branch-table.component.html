@@ -17,7 +17,7 @@
 
         <tbody>
             <tr *ngFor="let branch of branches$ | async; index as i">
-                <th scope="row">{{ branch.branchId }}</th> <!-- id's can be easily obfuscated with (i + 1) * service.page -->
+                <th scope="row">{{ service.page * service.pageSize - 9 + i }}</th> <!-- id's can be easily obfuscated with (i + 1) -->
                 <td>
                     <ngb-highlight [result]="branch.branchName" [term]="service.searchTerm"></ngb-highlight>
                 </td>
