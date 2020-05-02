@@ -1,6 +1,6 @@
 import { Injectable, PipeTransform } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Branch } from './entities/branch';
+import { Branch } from '../entities/branch';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 

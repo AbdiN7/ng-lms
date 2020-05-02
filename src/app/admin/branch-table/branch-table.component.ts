@@ -1,8 +1,8 @@
 import { Component, OnInit, PipeTransform, ApplicationRef } from '@angular/core';
-import { BranchHttpService } from 'src/app/common/admin/branch-http.service';
+import { BranchHttpService } from 'src/app/admin/services/branch-http.service';
 import { FormControl } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Branch } from 'src/app/common/admin/entities/branch';
+import { Branch } from 'src/app/admin/entities/branch';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

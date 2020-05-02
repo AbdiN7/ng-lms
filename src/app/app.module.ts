@@ -24,7 +24,7 @@ import { AuthorTableComponent } from './admin/author-table/author-table.componen
 import { PublisherTableComponent } from './admin/publisher-table/publisher-table.component';
 import { BorrowerTableComponent } from './admin/borrower-table/borrower-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BranchHttpService } from './common/admin/branch-http.service';
+import { BranchHttpService } from './admin/services/branch-http.service';
 
 import { BorrowerComponent } from './borrower/borrower.component';
 import { BookListComponent } from './borrower/book-list/book-list.component';
