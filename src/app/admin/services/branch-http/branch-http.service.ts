@@ -25,11 +25,11 @@ function matches(branch: Branch, term: string) {
 
 const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-function sort(countries: Branch[], column: SortColumn, direction: string): Branch[] {
+function sort(branches: Branch[], column: SortColumn, direction: string): Branch[] {
   if (direction === '' || column === '') {
-    return countries;
+    return branches;
   } else {
-    return [...countries].sort((a, b) => {
+    return [...branches].sort((a, b) => {
       const res = compare(`${a[column]}`, `${b[column]}`);
       return direction === 'asc' ? res : -res;
     });
