@@ -3,7 +3,6 @@ import { Book} from '../entities/book';
 import { Observable } from 'rxjs';
 import {Router} from '@angular/router'
 import {NgbdSortableHeader, SortEvent} from '../services/sortable.directive';
-import { BooksService } from '../services/book.service';
 import { BookCopyService } from '../services/book-copy.service';
 import { BranchService } from '../services/branch.service';
 // import { BookHttpService as BooksService} from '../../common/book-http.service';
@@ -18,7 +17,7 @@ import { BookLoan } from '../entities/book-loan';
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css'],
-  providers: [BooksService, DecimalPipe, BookCopyService, BranchService, BookLoansService ]
+  providers: [ DecimalPipe, BookCopyService, BranchService, BookLoansService ]
 })
 
 export class BookListComponent implements OnInit 
@@ -36,13 +35,12 @@ export class BookListComponent implements OnInit
   cardNo: any;
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
   constructor(
-    public service: BooksService, 
     public bookCopyService: BookCopyService, 
     public branchService: BranchService,
     public bookLoanService: BookLoansService,
     private router: Router) {
-    this.bookcopies$ = service.bookcopies$;
-    this.total$ =  service.total$;
+    this.bookcopies$ = bookCopyService.bookcopies$;
+    this.total$ =  bookCopyService.total$;
     
     
    }
@@ -54,8 +52,8 @@ export class BookListComponent implements OnInit
        {header.direction = '';
       }
      });
-     this.service.sortColumn = column;
-     this.service.sortDirection = direction;
+     this.bookCopyService.sortColumn = column;
+     this.bookCopyService.sortDirection = direction;
    }
   ngOnInit(): void 
   {
@@ -73,7 +71,7 @@ export class BookListComponent implements OnInit
   logBranch(e: Branch)
   {
     this.currBranch = e;
-    this.service.getBooksById(e.branchId);
+    this.bookCopyService.getBooksById(e.branchId);
   }
   getBorrower(cardNo: number) : void
   {
