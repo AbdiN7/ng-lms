@@ -10,23 +10,23 @@ import { Observable } from 'rxjs';
   providers: [BookLoansService],
   styleUrls: ['./borrower.component.css']
 })
-export class BorrowerComponent implements OnInit {
-  // BookLoans$: BookLoan[];
+export class BorrowerComponent implements OnInit 
+{
   _BookLoans$: Observable<BookLoan[]>
   BookLoans$: BookLoan[]
   total$: Observable<number>
 
-  constructor(private bookLoansService: BookLoansService)  {
+  constructor(private bookLoansService: BookLoansService)  
+  {
     this._BookLoans$ = bookLoansService.bookloans$
     this.total$ = bookLoansService.total$;
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   
   getLoans(cardNo: number): void
   {
     console.log(this._BookLoans$)
-    const newloan = this.bookLoansService.getBookLoans(cardNo)
+    this.bookLoansService.getBookLoans(cardNo)
     .subscribe(bookloans => (this.BookLoans$ = bookloans) ); 
   }
   delete(bookloan: BookLoan)
@@ -34,7 +34,5 @@ export class BorrowerComponent implements OnInit {
     this.BookLoans$ = this.BookLoans$.filter( bl => bl!= bookloan );
     this.bookLoansService.deleteBookLoan(bookloan).subscribe();
 
-    // this.bookLoansService.deleteBookLoan(e);
-    // console.log(this.BookLoans$);
   }
 }

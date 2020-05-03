@@ -12,9 +12,6 @@ import { BookCopy } from '../entities/book-copy';
 import { Branch } from '../entities/branch';
 import { BookLoansService } from '../services/book-loan.service';
 import { BookLoan } from '../entities/book-loan';
-import { skip } from 'rxjs/operators';
-import { tick } from '@angular/core/testing';
-
 
 @Component(
   {
@@ -24,7 +21,8 @@ import { tick } from '@angular/core/testing';
   providers: [BooksService, DecimalPipe, BookCopyService, BranchService, BookLoansService ]
 })
 
-export class BookListComponent implements OnInit {
+export class BookListComponent implements OnInit 
+{
   bookcopies$: Observable<BookCopy[]>;
   total$: Observable<number>;
   Books: Book[];
@@ -58,16 +56,10 @@ export class BookListComponent implements OnInit {
      this.service.sortColumn = column;
      this.service.sortDirection = direction;
    }
-  ngOnInit(): void {
-    let mybooks = this.service.getBooks()
-    .subscribe(book => ( this.Books = book) ); 
-
-    // this.consoleLogBooks();
-    // this.copyService.getBookCopy();
+  ngOnInit(): void 
+  {
     this.branchService.getBranches()
     .subscribe(branch => (this.Branches = branch));
-
-
   }
   
   logBookButton(e : BookCopy)
