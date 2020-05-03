@@ -172,12 +172,12 @@ export class BranchHttpService {
   private _search(): Observable<SearchResult> {
     const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
-    // sort
-    let branches = sort(this._ALL_BRANCHES$.getValue(), sortColumn, sortDirection);
-
     // filter
-    branches.filter(branch => matches(branch, searchTerm));
+    let branches = this._ALL_BRANCHES$.getValue().filter(branch => matches(branch, searchTerm));
     const total = branches.length;
+    
+    // sort
+    branches = sort(branches, sortColumn, sortDirection);
 
     // paginate
     branches = branches.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
