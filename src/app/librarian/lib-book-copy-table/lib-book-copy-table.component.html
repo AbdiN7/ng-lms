@@ -14,7 +14,6 @@
       <th scope="col">Branch</th>
       <th scope="col">Book Title</th>
       <th scope="col">Copies</th>
-      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +23,7 @@
       <td>{{a.bookCopyKey.branch.branchName | uppercase}}</td>
       <td>{{a.bookCopyKey.book.title | uppercase}}</td>
       <td>{{a.noOfCopies}}</td>
-      <td><button type="button" class="btn btn-primary" (click)="open(editBookCopyModal, a)">Edit</button></td>
+      <td><button type="button" class="btn btn-info" (click)="open(editBookCopyModal, a)">Edit</button></td>
       <td><button type="button" class="btn btn-danger" (click)="deleteBookCopy(a)">Delete</button></td>
     </tr>
   </tbody>
