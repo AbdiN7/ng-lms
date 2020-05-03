@@ -1,1 +1,16 @@
 @import '~bootstrap/dist/css/bootstrap.css';
+
+.cardInput {
+    padding: 35px;
+    text-align: center;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+.showInput {
+    display: block;
+    text-align: center;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 20px;
+    font-size: large;
+}

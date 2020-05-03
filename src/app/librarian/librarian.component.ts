@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LibrarianComponent implements OnInit {
   
-  active = 'Books, Branches';
+  active = 'Books';
 
   constructor() { }
 
