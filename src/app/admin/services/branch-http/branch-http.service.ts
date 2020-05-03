@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Branch } from '../../entities/branch';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
+import {SortColumn, SortDirection} from '../../directives/sortable-header.directive';
 
 interface SearchResult {
   branches: Branch[];
@@ -13,11 +14,26 @@ interface State {
   page: number;
   pageSize: number;
   searchTerm: string;
+  sortColumn: SortColumn;
+  sortDirection: SortDirection;
 }
 
 function matches(branch: Branch, term: string) {
   return branch.branchName.toLowerCase().includes(term.toLowerCase()) 
       || branch.branchAddress.toLowerCase().includes(term.toLowerCase());
+}
+
+const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+
+function sort(countries: Branch[], column: SortColumn, direction: string): Branch[] {
+  if (direction === '' || column === '') {
+    return countries;
+  } else {
+    return [...countries].sort((a, b) => {
+      const res = compare(`${a[column]}`, `${b[column]}`);
+      return direction === 'asc' ? res : -res;
+    });
+  }
 }
 
 @Injectable({providedIn: 'root'})
@@ -36,6 +52,8 @@ export class BranchHttpService {
     page: 1,
     pageSize: 10,
     searchTerm: '',
+    sortColumn: '',
+    sortDirection: ''
   };
 
   constructor(private http: HttpClient ) {
@@ -142,6 +160,8 @@ export class BranchHttpService {
   set page(page: number) { this._set({page}); }
   set pageSize(pageSize: number) { this._set({pageSize}); }
   set searchTerm(searchTerm: string) { this._set({searchTerm}); }
+  set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
+  set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
 
 
   private _set(patch: Partial<State>) {
@@ -150,10 +170,13 @@ export class BranchHttpService {
   }
 
   private _search(): Observable<SearchResult> {
-    const {pageSize, page, searchTerm} = this._state;
+    const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
+
+    // sort
+    let branches = sort(this._ALL_BRANCHES$.getValue(), sortColumn, sortDirection);
 
     // filter
-    let branches = this._ALL_BRANCHES$.getValue().filter(branch => matches(branch, searchTerm));
+    branches.filter(branch => matches(branch, searchTerm));
     const total = branches.length;
 
     // paginate

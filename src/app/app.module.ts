@@ -28,7 +28,8 @@ import { BranchHttpService } from './admin/services/branch-http/branch-http.serv
 
 import { BorrowerComponent } from './borrower/borrower.component';
 import { BookListComponent } from './borrower/book-list/book-list.component';
-import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
+import { NgbdSortableHeader} from './borrower/book-list/sortable.directive';
+import { SortableHeaderDirective } from './admin/directives/sortable-header.directive'
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { NgbdSortableHeader} from './borrower/book-list/sortable.directive'
     NgbdSortableHeader,
     BorrowerComponent,
     BookListComponent,
+    SortableHeaderDirective,
   ],
   imports: [
     BrowserModule,
