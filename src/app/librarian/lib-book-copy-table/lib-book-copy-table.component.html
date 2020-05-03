@@ -1,20 +1,13 @@
 
 <!-- <button type="button" class="btn btn-primary" (click)="openCreate(createBookCopyModal)">Create New Book Copy</button> -->
+<h3>List of Books Book Copies in LMS Application.</h3>
 
-
-<button class="btn btn-lg btn-primary" (click)="openCreate(content)">Add Book Copies to a New Branch</button>
-
-<div class="ds-l-row ds-u-margin-top--3">
-  <div class="ds-l-col--9">
-    <ngb-pagination [collectionSize]="totalBookCopies" [(page)]="pager.currentPage" [maxSize]="5" [boundaryLinks]="true"
-      (pageChange)="setPage($event)"></ngb-pagination>
-  </div>
-</div>
-<div class="ds-l-row ds-u-margin-top--3">
-  Search by Branch: <input type="Text" [(ngModel)]="searchString" (input)="searchBookCopies()">
+<div class="form-group form-inline">
+  Search by Branch: <input class="form-control ml-2" type="Text" [(ngModel)]="searchString" (input)="searchBookCopies()">
+  <button class="btn btn-success mr-1" style="margin-left: auto;" (click)="openCreate(content)">Add Book Copies to a New Branch</button>
 </div>
 
-<table class="table table-dark">
+<table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -36,6 +29,12 @@
     </tr>
   </tbody>
 </table>
+<div class="ds-l-row ds-u-margin-top--3">
+  <div class="ds-l-col--9">
+    <ngb-pagination [collectionSize]="totalBookCopies" [(page)]="pager.currentPage" [maxSize]="5" [boundaryLinks]="true"
+      (pageChange)="setPage($event)"></ngb-pagination>
+  </div>
+</div>
 
 <ng-template #content let-modal let-c="close" let-d="dismiss">
   <div class="modal-header">
