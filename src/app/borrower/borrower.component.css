@@ -14,8 +14,3 @@
     padding-top: 20px;
     font-size: large;
 }
-#buttonInput:active {
-    outline-color: aqua;
-    background-color: green;
-    border-radius: 0%;
-}

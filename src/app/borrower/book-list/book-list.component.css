@@ -1,17 +1,4 @@
 @import '~bootstrap/dist/css/bootstrap.css';
-.booklist-container{
-    background-color: #9b9b9b;
-    height: 100%;
-    min-height: 1000px;
-}
-
-.booklist {
-    background-color: #ffffff;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-}
-
 .cardInput {
     /* padding: 35px; */
     text-align: center;
