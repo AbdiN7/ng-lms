@@ -1,9 +1,11 @@
-import { Component, OnInit, PipeTransform, ApplicationRef } from '@angular/core';
-import { BranchHttpService } from 'src/app/common/admin/branch-http.service';
+import { Component, OnInit, PipeTransform, ApplicationRef, ViewChildren, QueryList } from '@angular/core';
+import { BranchHttpService } from 'src/app/admin/services/branch-http/branch-http.service';
 import { FormControl } from '@angular/forms';
+import { SortEvent } from '../directives/sortable-header.directive';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Branch } from 'src/app/common/admin/entities/branch';
+import { Branch } from 'src/app/admin/entities/branch';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SortableHeaderDirective } from '../directives/sortable-header.directive';
 
 @Component({
   selector: 'app-branch-table',
@@ -11,6 +13,9 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./branch-table.component.css']
 })
 export class BranchTableComponent implements OnInit {
+
+  @ViewChildren(SortableHeaderDirective) headers: QueryList<SortableHeaderDirective>;
+  
   // data
   branches$: Observable<Branch[]>;
   total$: Observable<number>;
@@ -33,6 +38,18 @@ export class BranchTableComponent implements OnInit {
   ngOnInit(): void {
     console.log("BRANCH TABLE COMPONENT LOADED");
     this.service.getBranches();
+  }
+  
+  onSort({column, direction}: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    this.service.sortColumn = column;
+    this.service.sortDirection = direction;
   }
 
   createBranch(branch: Branch){
