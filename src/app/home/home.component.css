@@ -11,3 +11,21 @@
     margin-left: 2%;
     margin-right: 2%;
 }
+
+
+
+@media only screen and (max-width: 600px) {
+.container {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.row {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+.card{
+    min-width: 95%;
+    }
+}
+
