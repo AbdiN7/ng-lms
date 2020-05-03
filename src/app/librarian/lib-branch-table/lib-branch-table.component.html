@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let a of pagedItems | lmsSort ; let i=index">
+    <tr *ngFor="let a of pagedItems | lmsBranchSort ; let i=index">
       <!-- {{a | json}} -->
       <th scope="row">{{i+1}}</th>
       <td>{{a.branchId}}</td>

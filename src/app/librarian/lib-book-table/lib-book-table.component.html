@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let a of pagedItems | lmsSort ; let i=index">
+    <tr *ngFor="let a of pagedItems | lmsNameSort ; let i=index">
       <!-- {{a | json}} -->
       <th scope="row">{{i+1}}</th>
       <td>{{a.title | uppercase}}</td>

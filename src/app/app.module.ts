@@ -29,6 +29,8 @@ import { NgbdSortableHeader} from './borrower/services/sortable.directive'
 import { BookLoansService } from './borrower/services/book-loan.service';
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
+import { LmsNameSortPipe } from './common/pipes/lms-name-sort.pipe';
+import { LmsBranchSortPipe } from './common/pipes/lms-branch-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { MessageService } from './message.service';
     NgbdSortableHeader,
     BorrowerComponent,
     BookListComponent,
+    LmsNameSortPipe,
+    LmsBranchSortPipe,
   ],
   imports: [
     BrowserModule,
