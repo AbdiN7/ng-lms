@@ -13,6 +13,10 @@ export class LibBookCopyTableComponent implements OnInit, AfterViewInit {
   constructor(private httpService: LmshttpService, private modalService: NgbModal, private pagerService: PagerService) { }
   bookCopies: any;
   selectedBookCopy: any;
+  selectedBook: any;
+  selectedBranch: any;
+  selectedBookName = "Pick a Book";
+  selectedBranchName = "Pick a Branch";
   createdBookCopy: any;
   private modalRef: NgbModalRef;
   errMsg: any;
@@ -20,10 +24,17 @@ export class LibBookCopyTableComponent implements OnInit, AfterViewInit {
   totalBookCopies = 0;
   today = new Date();
   pager: any = {};
+  books: any;
+  totalBooks = 0;
+  branches: any;
+  totalBranches = 0;
   pagedItems: any[];
   searchString = '';
+
   ngOnInit() {
     this.loadAllBookCopies();
+    this.loadAllBranches();
+    this.loadAllBooks();
     this.createdBookCopy = {
       bookCopyId: {
         bookId: 0,
@@ -37,6 +48,34 @@ export class LibBookCopyTableComponent implements OnInit, AfterViewInit {
     console.log('after view is loaded.');
   }
 
+  ChangeDropDownBranchName(branch){
+    this.selectedBranch = branch;
+    this.selectedBranchName = branch.branchName;
+  }
+
+  ChangeDropDownBookName(book){
+    this.selectedBook = book;
+    this.selectedBookName = book.title;
+  }
+
+  loadAllBranches() {
+    this.httpService.getAll('http://localhost:8090/lms/librarian/branches').subscribe(resp => {
+      this.branches = resp;
+      this.totalBranches = this.branches.length;
+      this.setPage(1);
+    })
+  }
+
+  loadAllBooks() {
+    console.log("LOADING ALL BOOKS");
+    this.httpService.getAll('http://localhost:8090/lms/librarian/books').subscribe(resp => {
+      this.books = resp;
+      console.log(this.books);
+      this.totalBooks = this.books.length;
+      this.setPage(1);
+    })
+  }
+
   loadAllBookCopies() {
     console.log("LOADING ALL BOOK COpies");
     this.httpService.getAll('http://localhost:8090/lms/librarian/bookcopies').subscribe(resp => {
@@ -48,11 +87,7 @@ export class LibBookCopyTableComponent implements OnInit, AfterViewInit {
   }
 
   openCreate(content){
-    console.log("createdbc");
-    console.log(this.createdBookCopy);
     this.selectedBookCopy = this.createdBookCopy;
-    console.log("Selectedbc");
-    console.log(this.selectedBookCopy);
     this.modalRef = this.modalService.open(content);
     this.modalRef.result.then(
       result => {
@@ -85,7 +120,6 @@ export class LibBookCopyTableComponent implements OnInit, AfterViewInit {
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
-    console.log(this.bookCopies);
     this.pager = this.pagerService.getPager(this.bookCopies.length, page, 10);
     this.pagedItems = this.bookCopies.slice(
       this.pager.startIndex,
@@ -94,7 +128,6 @@ export class LibBookCopyTableComponent implements OnInit, AfterViewInit {
   }
 
   searchBookCopies(){
-    console.log(this.searchString);
     this.httpService.getAll(`http://localhost:8090/lms/librarian/bookcopy/branch/${this.searchString}`).subscribe(resp => {
       this.bookCopies = resp;
       this.totalBookCopies = this.bookCopies.length;
@@ -105,12 +138,8 @@ export class LibBookCopyTableComponent implements OnInit, AfterViewInit {
   createBookCopy(){
     let body = {
       "bookCopyKey": {
-          "book": {
-              "bookId": this.selectedBookCopy.bookCopyId.bookId
-          },
-          "branch": {
-              "branchId": this.selectedBookCopy.bookCopyId.branchId
-          }
+          "book": this.selectedBook,
+          "branch": this.selectedBranch
       },
       "noOfCopies": this.selectedBookCopy.noOfCopies
     }

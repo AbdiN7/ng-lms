@@ -1,6 +1,7 @@
 
 <!-- <button type="button" class="btn btn-primary" (click)="openCreate(createBookCopyModal)">Create New Book Copy</button> -->
 
+
 <button class="btn btn-lg btn-primary" (click)="openCreate(content)">Add Book Copies to a New Branch</button>
 
 <div class="ds-l-row ds-u-margin-top--3">
@@ -46,12 +47,30 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="recipient-name" class="col-form-label">Branch ID:</label>
-        <input class="form-control" name="branchId" [(ngModel)]="selectedBookCopy.bookCopyId.branchId">
-        <label for="recipient-name" class="col-form-label">Book ID:</label>
-        <input class="form-control" name="bookId" [(ngModel)]="selectedBookCopy.bookCopyId.bookId">
+        <div class="row">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBranch" ngbDropdownToggle>{{selectedBranchName}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBranch">
+                <button ngbDropdownItem *ngFor="let branch of branches" [value]="selectedBranch" (click)="ChangeDropDownBranchName(branch)">
+                  {{branch.branchName}}
+                </button>
+              </div>
+            </div>
+            <br>
+            <br>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBook" ngbDropdownToggle>{{selectedBookName}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBook">
+                <button ngbDropdownItem *ngFor="let book of books" [value]="selectedBook" (click)="ChangeDropDownBookName(book)">
+                  {{book.title}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         <label for="recipient-name" class="col-form-label">Number of Copies:</label>
-        <input class="form-control" name="noOfCopies" [(ngModel)]="selectedBookCopy.noOfCopies">
+        <input class="form-control" name="noOfCopies" [(ngModel)]="selectedBookCopy.noOfCopies"> 
       </div>
     </form>
   </div>
