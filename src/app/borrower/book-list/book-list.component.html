@@ -31,7 +31,7 @@
       </div>
       <div class="col">
     <!-- <div class="form-group form-inline"> -->
-      <input type="text" class="form-control" placeholder="Search for...." aria-label="search" aria-describedby="basic-addon2" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+      <input type="text" class="form-control" placeholder="Search for...." aria-label="search" aria-describedby="basic-addon2" name="searchTerm" [(ngModel)]="bookCopyService.searchTerm"/>
       <!-- <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span> -->
 
   </div>
@@ -62,11 +62,11 @@
       <tr *ngFor="let bookcopy of bookcopies$ | async; index as i ">
         <th scope="row">{{ i+1}}</th>
         <td>
-          <ngb-highlight [result]="bookcopy.bookCopyKey.book.title" [term]="service.searchTerm"></ngb-highlight>
+          <ngb-highlight [result]="bookcopy.bookCopyKey.book.title" [term]="bookCopyService.searchTerm"></ngb-highlight>
         </td>
-        <td><ngb-highlight [result]="bookcopy.bookCopyKey.book.author.authorName " [term]="service.searchTerm"></ngb-highlight>
+        <td><ngb-highlight [result]="bookcopy.bookCopyKey.book.author.authorName " [term]="bookCopyService.searchTerm"></ngb-highlight>
         </td>
-        <td><ngb-highlight [result]="bookcopy.bookCopyKey.book.publisher.publisherName " [term]="service.searchTerm"></ngb-highlight></td>
+        <td><ngb-highlight [result]="bookcopy.bookCopyKey.book.publisher.publisherName " [term]="bookCopyService.searchTerm"></ngb-highlight></td>
         <td>
           <button type="button" class="btn btn-info mr-1" (click)="logBookButton(bookcopy)" >Checkout book</button>
  
@@ -84,10 +84,10 @@
     </li> -->
     <div class="d-flex justify-content-between p-2">
         <ngb-pagination
-        [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+        [collectionSize]="(total$ | async)!" [(page)]="bookCopyService.page" [pageSize]="bookCopyService.pageSize">
       </ngb-pagination>
   
-      <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+      <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="bookCopyService.pageSize">
         <option [ngValue]="5">5 items per page</option>
         <option [ngValue]="10">10 items per page</option>
         <option [ngValue]="20">20 items per page</option>
