@@ -31,6 +31,7 @@ export class BookListComponent implements OnInit
   BookLoans: BookLoan[];
   currBranch: Branch;
   currBook: Book;
+  savedBorrwer: boolean;
   Loan: any;
   cardNo: any;
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
@@ -79,12 +80,16 @@ export class BookListComponent implements OnInit
     this.cardNo = cardNo;
     this.bookLoanService.getBookLoans(cardNo)
     .subscribe(bookloans => (this.BookLoans = bookloans) ); 
+    this.savedBorrwer = true;
   }
-  borrower(): string
+  changeBorrower(): string
   {
-    return this.cardNo
+    if(this.savedBorrwer && this.cardNo)
+    {
+      return "change number"
+    }
+    return "save number"
   }
-
 
 
 }

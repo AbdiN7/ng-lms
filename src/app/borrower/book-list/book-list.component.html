@@ -1,4 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="booklist-container">
+
+  <div class="booklist">
 
   <form>
     <div >
@@ -7,10 +10,8 @@
     <div class="form-group form-inline">
       <input #cardNo placeholder="Card Number" aria-label="cardNumber" aria-describedby="basic-addon1">
       
-      <button type="button" id="buttonInput" class="btn btn-primary" (click)="getBorrower(cardNo.value) " > Get Card Number </button>
+      <button type="button" class="btn btn-primary" (click)="getBorrower(cardNo.value) " > {{changeBorrower()}} </button>
       <div class="showInput">
-
-      <p> Current Card Number: {{borrower()}} </p>
     </div>
 
     </div>
@@ -22,7 +23,7 @@
       <div class="col">
 
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-danger" id="dropdownBasic1" ngbDropdownToggle>Select a Library Branch</button>
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select a Library Branch</button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <button (click)="logBranch(branch)" ngbDropdownItem *ngFor="let branch of Branches"> 
               <span class="badge"> {{branch.branchName}}</span> </button>
@@ -97,3 +98,6 @@
   </div>
 
   </form>
+
+  </div>
+  </div>

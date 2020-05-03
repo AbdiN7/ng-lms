@@ -1,4 +1,16 @@
 @import '~bootstrap/dist/css/bootstrap.css';
+.booklist-container{
+    background-color: #9b9b9b;
+    height: 100%;
+    min-height: 1000px;
+}
+
+.booklist {
+    background-color: #ffffff;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
 
 .cardInput {
     /* padding: 35px; */
@@ -12,10 +24,7 @@
     padding-left: 25%;
     padding-right: 25%;
     padding-top: 20px;
-    font-size: large;
+    /* font-size: large; */
 }
-#buttonInput:active {
-    outline-color: aqua;
-    background-color: green;
-    border-radius: 0%;
-}
+
+
