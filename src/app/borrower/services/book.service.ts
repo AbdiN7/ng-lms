@@ -17,7 +17,7 @@ const httpOptions = {
   })
 };
 
-let myBooks; // CHANGE ThIS
+let myBooks; 
 interface SearchResult {
     bookcopies: BookCopy[];
     total: number;
@@ -30,12 +30,11 @@ interface SearchResult {
     sortColumn: SortColumn;
     sortDirection: SortDirection;
   }
-  function matches(bookcopy: BookCopy, term: string, pipe: PipeTransform) {
+  function matches(bookcopy: BookCopy, term: string) {
     return bookcopy.bookCopyKey.book.title.toLowerCase().includes(term.toLowerCase()) 
     || bookcopy.bookCopyKey.book.author.authorName.toLowerCase().includes(term.toLowerCase())
     || bookcopy.bookCopyKey.book.publisher.publisherName.toLowerCase().includes(term.toLowerCase());
-      // || pipe.transform(book.publisher.publisherName).includes(term);
-      // || pipe.transform(book.publisher.publisherName).includes(term);
+
   }
   const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
   
@@ -75,26 +74,6 @@ export class BooksService {
     private pipe: DecimalPipe) {
     this.handleError = httpErrorHandler.createHandleError('BooksService');
     
-    // this.http.get<Book[]>('http://localhost:8087/lms/borrower/book').subscribe(resp => {
-    //   this._books$.next(resp);
-    //   myBooks = this._books$.value;
-    // });
-    //     if(this._books$.value)
-    //     {
-    //       this._search$.pipe(
-    //         tap(() => this._loading$.next(true)),
-    //         debounceTime(200),
-    //         switchMap(() => this._search()),
-    //         delay(200),
-            
-    //         tap(() => this._loading$.next(false))
-    //       ).subscribe(result => {
-    //         this._books$.next(result.books);
-    //         this._total$.next(result.total);
-    //       });
-    //     this._search$.next();
-    //     }
-        
   }
 
   getBooksById(branchId) {
@@ -146,29 +125,14 @@ private _set(patch: Partial<State>) {
 
 private _search(): Observable<SearchResult> {
     const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
-
-    // 1. sort
-    // let allBooks = [];
-    // for (const book in this.getBooks() )
-    // {
-    //     allBooks.push(book);
-    //     console.log(allBooks)
-    // }
     
     let bookcopies = sort(myBooks, sortColumn, sortDirection);
     // 2. filter
-    bookcopies = bookcopies.filter(bookcopy => matches(bookcopy, searchTerm, this.pipe));
+    bookcopies = bookcopies.filter(bookcopy => matches(bookcopy, searchTerm));
     const total = bookcopies.length;
 
     // 3. paginate
     bookcopies = bookcopies.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({bookcopies, total});
   }
-  // deleteBook (id: number): Observable<{}> {
-  //   const url = `${this.BookUrl}/${id}`;
-  //   return this.http.delete(url, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('deleteBook'))
-  //     );
-  // }
 }

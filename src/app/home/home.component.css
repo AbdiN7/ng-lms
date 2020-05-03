@@ -1,0 +1,17 @@
+.home{
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+.container {
+    padding-left: 5%;
+    text-align: center;
+    padding-right: 5%;
+}
+.row {
+    text-align: center;
+}
+.card{
+    margin-left: 2%;
+    margin-right: 2%;
+}
