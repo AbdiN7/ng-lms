@@ -57,7 +57,6 @@ import { LmsBranchSortPipe } from './common/pipes/lms-branch-sort.pipe';
     SortableHeaderDirective,
     LmsNameSortPipe,
     LmsBranchSortPipe,
-    TestcompComponent,
   ],
   imports: [
     BrowserModule,
