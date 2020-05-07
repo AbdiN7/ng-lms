@@ -25,7 +25,7 @@ export class BorrowerComponent implements OnInit
   
   getLoans(cardNo: number): void
   {
-    console.log(this._BookLoans$)
+    // console.log(this._BookLoans$)
     this.bookLoansService.getBookLoans(cardNo)
     .subscribe(bookloans => (this.BookLoans$ = bookloans) ); 
   }

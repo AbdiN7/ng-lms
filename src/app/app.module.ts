@@ -32,6 +32,7 @@ import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import { LmsNameSortPipe } from './common/pipes/lms-name-sort.pipe';
 import { LmsBranchSortPipe } from './common/pipes/lms-branch-sort.pipe';
+import { TestcompComponent } from './testcomp/testcomp.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { LmsBranchSortPipe } from './common/pipes/lms-branch-sort.pipe';
     SortableHeaderDirective,
     LmsNameSortPipe,
     LmsBranchSortPipe,
+    TestcompComponent,
   ],
   imports: [
     BrowserModule,

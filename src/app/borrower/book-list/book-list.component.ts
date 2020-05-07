@@ -5,7 +5,6 @@ import {Router} from '@angular/router'
 import {NgbdSortableHeader, SortEvent} from '../services/sortable.directive';
 import { BookCopyService } from '../services/book-copy.service';
 import { BranchService } from '../services/branch.service';
-// import { BookHttpService as BooksService} from '../../common/book-http.service';
 import { DecimalPipe } from '@angular/common';
 import { BookCopy } from '../entities/book-copy';
 import { Branch } from '../entities/branch';
