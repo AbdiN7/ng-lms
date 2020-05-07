@@ -1,24 +1,21 @@
-<header style="margin-bottom: 3em;">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">LMS</a>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" [routerLink]="''">LMS</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" 
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+        &#9776;
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarCollapse" bis_skin_checked="1">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/lms/admin">Administrator</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/lms/borrower">Borrower</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/lms/librarian">Librarian</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/lms/admin">Administrator</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/lms/borrower">Borrower</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/lms/librarian">Librarian</a>
+            </li>
+        </ul>
+    </div>
+</nav>
